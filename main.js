@@ -1,4 +1,4 @@
- 
+
 // Constants
 const API_KEY = 'AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE';
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
@@ -9,6 +9,8 @@ const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 const listenButton = document.getElementById('listen-button');
 const newChatButton = document.querySelector('.new-chat-button');
+
+
 
 // State management
 let currentChatId = generateChatId();
@@ -39,6 +41,25 @@ function createEnhancedPrompt(message, context = []) {
         }]
     };
 }
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('show');
+}
+
+function usePrompt(value) {
+    const userInput = document.getElementById('user-input');
+    userInput.value = value;
+}
+ // Ensure only 5 chats are displayed, show the rest as hidden
+function limitChatHistory() {
+    const chatItems = document.querySelectorAll('.chat-item');
+    chatItems.forEach((item, index) => {
+        if (index >= 5) {
+            item.style.display = 'none'; // Hide chats after the 5th one
+        }
+    });
+}
+limitChatHistory();
 
 // API interaction with retry mechanism
 async function fetchAIResponse(prompt, retries = 3) {
