@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Generation/Analysis</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your global CSS -->
+  <style>
+    .container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+#image-upload {
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#image-preview {
+  margin-top: 20px;
+}
+
+#analysis-result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #28a745;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Generation & Analysis</h1>
+    <form id="image-form" enctype="multipart/form-data">
+      <input type="file" id="image-upload" accept="image/*">
+      <button type="submit">Analyze Image</button>
+    </form>
+
+    <div id="image-preview"></div>
+    <div id="analysis-result"></div>
+  </div>
+
+  <script src="image-generation.js">
+    document.getElementById('image-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  
+  const fileInput = document.getElementById('image-upload');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert('Please upload an image.');
+    return;
+  }
+
+  // Convert image to base64
+  const reader = new FileReader();
+  reader.onloadend = async function () {
+    const base64Image = reader.result;
+
+    // Send image to backend for analysis (Replace with your backend endpoint)
+    const apiUrl = '/api/analyze-image'; // Backend endpoint to analyze image
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image: base64Image })
+      });
+
+      const result = await response.json();
+      document.getElementById('analysis-result').innerText = result.message || 'Image analysis failed. Please try again.';
+    } catch (error) {
+      console.error('Error analyzing image:', error);
+      document.getElementById('analysis-result').innerText = 'Error analyzing image.';
+    }
+  };
+
+  reader.readAsDataURL(file);
+});
+
+  </script> <!-- Link to the JavaScript file -->
+</body>
+</html>
