@@ -290,6 +290,26 @@ body {
     border-color: var(--primary-blue);
     box-shadow: 0 0 15px var(--accent-glow);
 }
+.input-button1 {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.input-button1:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-blue);
+}
+
+
+
 
 #user-input {
     flex-grow: 1;
@@ -427,3 +447,6 @@ body {
         padding: 16px; /* Adjust padding for mobile */
     }
 }
+
+
+
