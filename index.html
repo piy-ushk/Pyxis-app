@@ -30,15 +30,16 @@
                 <option value="Help me with coding...">Help me with coding...</option>
             </select>
         </div>
-          <div class="sidebar-content">
-            <div class="chat-list">
-              <div class="chat-item">Chat 1</div>
-              <div class="chat-item">Chat 2</div>
-              <div class="chat-item">Chat 3</div>
-              <div class="chat-item">Chat 4</div>
-              <div class="chat-item">Chat 5</div>
-            </div>
-         </div>
+          
+          <div class="sidebar">
+            <ul>
+              <!-- Existing links -->
+              <li><a href="index.html">Home</a></li>
+              <li><a href="image-generation.html">Image Generation/Analysis</a></li>  
+              <li><a href="index2.html">Chat History</a></li>
+            </ul>
+          </div>
+          
           </div> 
            
     
@@ -74,13 +75,20 @@
             <div class="input-container">
                 <textarea id="user-input" placeholder="Message Pyxis..." rows="1"></textarea>
                 <div class="input-buttons">
-                    <button class="input-button" id="listen-button">
+                  <label class="input-button1">
+                    <input type="file" id="image-upload" accept="image/*" style="display: none;" name="Attach a File">
+                    
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M9 7C9 4.23858 11.2386 2 14 2C16.7614 2 19 4.23858 19 7V15C19 18.866 15.866 22 12 22C8.13401 22 5 18.866 5 15V9C5 8.44772 5.44772 8 6 8C6.55228 8 7 8.44772 7 9V15C7 17.7614 9.23858 20 12 20C14.7614 20 17 17.7614 17 15V7C17 5.34315 15.6569 4 14 4C12.3431 4 11 5.34315 11 7V15C11 15.5523 11.4477 16 12 16C12.5523 16 13 15.5523 13 15V9C13 8.44772 13.4477 8 14 8C14.5523 8 15 8.44772 15 9V15C15 16.6569 13.6569 18 12 18C10.3431 18 9 16.6569 9 15V7Z" fill="currentColor"></path>
+                    </svg> 
+                </label>
+                    <button class="input-button" id="listen-button" value="Say something">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" fill="currentColor"/>
                             <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" fill="currentColor"/>
                         </svg>
                     </button>
-                    <button class="input-button" id="send-button">
+                    <button class="input-button" id="send-button" name="Enter">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
                         </svg>
