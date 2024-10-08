@@ -68,7 +68,24 @@ body {
     border-radius: 50%;
     z-index: 100; /* Ensure the toggle is always visible */
 }
- 
+ .sidebar-items{
+    max-width: 60vh;
+    width: 55vh;
+    height: 100vh;
+    overflow-y: auto;
+    max-height: 100vh;
+    background-color: var(--secondary-dark);
+    border-right: 1px solid var(--border-color);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10; /* Ensure sidebar overlays chat messages */
+    
+    transition: transform 0.3s ease;
+ }
+ .sidebar-items a{
+    
+ }
 #prompts {
     margin-top: 16px;
     color: rgb(255, 255, 255);
