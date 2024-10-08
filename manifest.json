@@ -1,6 +1,6 @@
 {
-    "name": "Pyxis AI",
-    "short_name": "Pyxis",
+    "name": "Pixio AI",
+    "short_name": "Pixio",
     "description": "AI-powered assistant for image generation and analysis.",
     "start_url": "/index.html",
     "display": "standalone",
