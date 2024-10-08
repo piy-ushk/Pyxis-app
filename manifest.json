@@ -2,7 +2,7 @@
     "name": "Pyxis AI",
     "short_name": "Pyxis",
     "description": "AI-powered assistant for image generation and analysis.",
-    "start_url": "/Pyxis.html",
+    "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#007bff",
