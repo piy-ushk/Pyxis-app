@@ -1,4 +1,14 @@
-
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+  }
+  
 // Constants
 const API_KEY = 'AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE';
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
@@ -330,64 +340,3 @@ document.addEventListener('DOMContentLoaded', () => {
         addMessage('Hello! I\'m Pyxis AI. How can I help you today?', 'ai');
     }
 });
-
-// Function to handle image upload
-document.getElementById('image-upload').addEventListener('change', async function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        addMessage(`Image uploaded: ${file.name}`, 'user');
-
-        // Send the image to the backend
-        const formData = new FormData();
-        formData.append('image', file);
-
-        try {
-            // Send the image to the backend for processing
-            const response = await fetch('/analyze-image', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const data = await response.json();
-
-            if (data.description) {
-                // Display AI's response (description of the image)
-                generateAIResponse(data.description);
-            } else {
-                generateAIResponse("I wasn't able to analyze the image. Please try again.");
-            }
-        } catch (error) {
-            generateAIResponse("There was an error analyzing the image.");
-        }
-    }
-});
-
-function generateAIResponse(content) {
-    const aiResponse = `${content} Is there anything else you'd like assistance with?`;
-    addMessage(aiResponse, 'ai');
-}
-
-function addMessage(content, type) {
-    const chatMessages = document.querySelector('.chat-messages');
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message', type === 'ai' ? 'ai-message' : 'user-message');
-    messageElement.innerHTML = `
-        <div class="message-avatar">${type === 'ai' ? 'AI' : 'U'}</div>
-        <div class="message-content">${content}</div>
-    `;
-    chatMessages.appendChild(messageElement);
-
-    // Automatically scroll to the new user message
-    if (type === 'ai') {
-        focusOnUserMessage();
-    }
-}
-
-function focusOnUserMessage() {
-    const lastUserMessage = document.querySelector('.user-message:last-child');
-    if (lastUserMessage) {
-        lastUserMessage.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
-
