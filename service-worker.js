@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pyxis-cache-v1';
+const CACHE_NAME = 'Pixio-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
