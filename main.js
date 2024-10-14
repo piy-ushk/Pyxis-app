@@ -53,10 +53,55 @@ function createEnhancedPrompt(message, context = []) {
         }]
     };
 }
-function toggleSidebar() {
+document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('show');
-}
+    const chatContainer = document.querySelector('.chat-container');
+    
+    // Create and add pin button
+    const pinButton = document.createElement('button');
+    pinButton.innerHTML = '📌';
+    pinButton.className = 'pin-button';
+    sidebar.appendChild(pinButton);
+
+    // Create hover area
+    const hoverArea = document.createElement('div');
+    hoverArea.className = 'sidebar-hover-area';
+    document.body.appendChild(hoverArea);
+
+    let isPinned = false;
+    let isHovering = false;
+
+    pinButton.addEventListener('click', function() {
+        isPinned = !isPinned;
+        sidebar.classList.toggle('pinned', isPinned);
+        pinButton.classList.toggle('active', isPinned);
+        if (isPinned) {
+            sidebar.style.left = '0';
+        } else {
+            sidebar.style.left = isHovering ? '0' : '-280px';
+        }
+    });
+
+    // Handle sidebar hover
+    function showSidebar() {
+        if (!isPinned) {
+            isHovering = true;
+            sidebar.style.left = '0';
+        }
+    }
+
+    function hideSidebar() {
+        if (!isPinned) {
+            isHovering = false;
+            sidebar.style.left = '-280px';
+        }
+    }
+
+    hoverArea.addEventListener('mouseenter', showSidebar);
+    sidebar.addEventListener('mouseenter', showSidebar);
+
+    sidebar.addEventListener('mouseleave', hideSidebar);
+});
 
 function usePrompt(value) {
     const userInput = document.getElementById('user-input');
