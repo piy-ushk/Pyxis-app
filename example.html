@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXIO.ai - Your Mathematical Assistant</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.12.0/math.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+   
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class="p-4">
+            <h1 class="text-xl font-bold text-blue-500">PIXIO.ai for Academics</h1>
+        </div>
+        <nav>
+            <a href="example.html" class="nav-item active">
+                <i data-lucide="home" class="w-5 h-5 mr-3"></i>
+                Home
+            </a>
+            <a href="calculator.html" class="nav-item">
+                <i data-lucide="calculator" class="w-5 h-5 mr-3"></i>
+                Calculator
+            </a>
+            <a href="writer-helper.html" class="nav-item">
+                <i data-lucide="pen-tool" class="w-5 h-5 mr-3"></i>
+                Writer Helper
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
+                Study Tools
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
+                Settings
+            </a>
+        </nav>
+    </div>
+    <div class="main-content">
+        <!-- Home Section -->
+        <div id="home-section">
+            <h2 class="text-2xl font-bold mb-6">Welcome to PIXIO.ai</h2>
+            
+            <!-- Quick Access Tools -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="tool-card">
+                    <i data-lucide="calculator" class="w-8 h-8 text-blue-500 mb-4"></i>
+                    <h3 class="text-lg font-semibold mb-2">Smart Calculator</h3>
+                    <p class="text-gray-400">Solve complex calculations with step-by-step explanations</p>
+                </div>
+                <div class="tool-card">
+                    <i data-lucide="pen-tool" class="w-8 h-8 text-blue-500 mb-4"></i>
+                    <h3 class="text-lg font-semibold mb-2">Writer Helper</h3>
+                    <p class="text-gray-400">Get help with mathematical writing and equations</p>
+                </div>
+                <div class="tool-card">
+                    <i data-lucide="book-open" class="w-8 h-8 text-blue-500 mb-4"></i>
+                    <h3 class="text-lg font-semibold mb-2">Study Tools</h3>
+                    <p class="text-gray-400">Access comprehensive study materials and guides</p>
+                </div>
+            </div>
+
+            <!-- Main Problem Solver -->
+            <div class="solution-card">
+                <h3 class="text-xl font-semibold mb-4">Problem Solver</h3>
+                <div class="input-container">
+                <textarea 
+                    id="question" 
+                    class="math-input mb-4" 
+                    rows="1" 
+                    placeholder="&nbsp;Enter your math problem here..."
+                ></textarea>
+                <a href="search-question.html" onclick="solveMathProblem()" class="btn-primary">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
+                    </svg>
+                </a>
+                
+                    
+                
+                
+            </div>
+                
+            </div>
+        </div>
+
+       
+    </div>
+
+    <script src="solve-math.js" >
+       
+    </script>
+</body>
+</html>
