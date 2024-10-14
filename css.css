@@ -1,0 +1,285 @@
+ /* Previous CSS styles remain the same */
+ :root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-dark: #0f172a;
+    --bg-darker: #020617;
+    --text-light: #e2e8f0;
+    --sidebar-width: 280px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-darker);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-right: 1px solid #1e293b;
+    overflow-y: auto;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: #1e293b;
+}
+
+.nav-item.active {
+    background-color: var(--primary-color);
+}
+
+.tool-card {
+    background-color: #1e293b;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.tool-card:hover {
+    transform: translateY(-2px);
+}
+.math-input {
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    color: var(--text-light);
+    padding: 1rem;
+    margin-bottom: 10%;
+    border-radius: 24px;
+    width: 100%;
+    resize: vertical;
+}
+
+.input-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    background-color: var(--secondary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+}
+.btn-primary  {
+        background: transparent;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+    }
+    
+    .btn-primary:hover {
+        background-color: var(--hover-color);
+        color: var(--primary-blue);
+    }
+
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.solution-card {
+    background-color: #1e293b;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    max-width: 400px;
+    margin: 1rem 0;
+}
+
+.calc-btn {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: var(--text-light);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.calc-btn:hover {
+    background-color: #334155;
+}
+
+.writer-helper {
+    background-color: #1e293b;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.description {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.input-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    margin-bottom: 2rem;
+}
+
+textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.btn-primary a {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+.result-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.result-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+.search-question-input{
+
+}
+#solution {
+    background-color: #142c52;
+    white-space: pre-wrap;
+    font-size: 1.1rem;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.loading::after {
+    content: "";
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 3px solid #e2e8f0;
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error {
+    color: #dc2626;
+    margin-top: 1rem;
+    display: none;
+}
+.solution-step {
+    margin-bottom: 1.5rem;
+}
+
+.step-heading {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.step-content {
+    margin-left: 1rem;
+    line-height: 1.8;
+}
+
+.final-answer {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-color);
+}
+
+pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    margin: 0;
+}
