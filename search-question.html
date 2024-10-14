@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXIO.ai - Your Mathematical Assistant</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.12.0/math.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+   
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class="p-4">
+            <h1 class="text-xl font-bold text-blue-500">PIXIO.ai for Academics</h1>
+        </div>
+        <nav>
+            <a href="example.html" class="nav-item active">
+                <i data-lucide="home" class="w-5 h-5 mr-3"></i>
+                Home
+            </a>
+            <a href="calculator.html" class="nav-item">
+                <i data-lucide="calculator" class="w-5 h-5 mr-3"></i>
+                Calculator
+            </a>
+            <a href="writer-helper.html" class="nav-item">
+                <i data-lucide="pen-tool" class="w-5 h-5 mr-3"></i>
+                Writer Helper
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
+                Study Tools
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
+                Settings
+            </a>
+        </nav>
+    </div>
+    <div class="main-content">
+        <nav class="search-question-nav">
+            <input class="search-question-input" placeholder="Ask another question">
+        </nav>
+        <div id="loading" class="hidden mt-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+        </div>
+        <div id="solution" class="mt-4"></div>
+    </div>
+
+    <script src="solve-math.js" >
+       
+    </script>
+</body>
+</html>
