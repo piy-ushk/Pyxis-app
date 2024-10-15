@@ -13,7 +13,7 @@
   
 // Constants
 const API_KEY = 'AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // DOM Elements
 const chatMessages = document.getElementById('chat-messages');
@@ -53,13 +53,20 @@ function createEnhancedPrompt(message, context = []) {
         }]
     };
 }
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('show');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar');
     const chatContainer = document.querySelector('.chat-container');
     
     // Create and add pin button
     const pinButton = document.createElement('button');
-    pinButton.innerHTML = '📌';
+    pinButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/></svg>';
+  
+
     pinButton.className = 'pin-button';
     sidebar.appendChild(pinButton);
 
@@ -164,7 +171,7 @@ function addMessage(text, type) {
     // Format AI responses
     if (type === 'ai') {
         // Remove any asterisks from the text
-        text = text.replace(/\#*/g, '');
+        text = text.replace(/\*/g, '');
         
         // Split response into sections
         const sections = text.split('\n\n');
