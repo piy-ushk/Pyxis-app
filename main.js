@@ -164,7 +164,7 @@ function addMessage(text, type) {
     // Format AI responses
     if (type === 'ai') {
         // Remove any asterisks from the text
-        text = text.replace(/\*/g, '');
+        text = text.replace(/\#*/g, '');
         
         // Split response into sections
         const sections = text.split('\n\n');
