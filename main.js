@@ -22,7 +22,23 @@ const sendButton = document.getElementById('send-button');
 const listenButton = document.getElementById('listen-button');
 const newChatButton = document.querySelector('.new-chat-button');
 
+let currentSlide = 0;
+const totalSlides = document.querySelectorAll('.prompt-card').length;
 
+function moveCarousel(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = totalSlides - 1;
+    if (currentSlide >= totalSlides) currentSlide = 0;
+    
+    const carousel = document.querySelector('.prompt-carousel');
+    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+function usePrompt(promptText) {
+    const userInput = document.getElementById('user-input');
+    userInput.value = promptText;
+    userInput.focus();
+}
 
 // State management
 let currentChatId = generateChatId();
