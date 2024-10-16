@@ -21,11 +21,13 @@ body {
 }
 
 .sidebar {
-    width: var(--sidebar-width);
-    background-color: var(--bg-darker);
+    max-width: 280px;
+    width: 280px;
     height: 100vh;
+    background-color: var(--bg-darker);
+     
     position: fixed;
-    left: 0;
+    left: -280px;
     top: 0;
     border-right: 1px solid #1e293b;
     overflow-y: auto;
@@ -282,4 +284,43 @@ pre {
     white-space: pre-wrap;
     font-family: inherit;
     margin: 0;
+}
+@media (max-width: 768px) {
+    
+    .sidebar {
+        width: 80%;
+        
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+        left: 0px;
+    }
+    .sidebar-toggle {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        background: var(--secondary-dark);
+        color: white;
+        border: none;
+        padding: 18px;
+        cursor: pointer;
+        border-radius: 50%;
+        z-index: 100; /* Ensure the toggle is always visible */
+    }
+    .main-container{
+        flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 60px; /* Space for header */
+    /* transition: all 0.3s ease; Smooth transition for content shift */
+    flex-grow: 1;
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+    }
 }
