@@ -4,7 +4,10 @@ const GEMINI_API_KEY = 'AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE';
 lucide.createIcons();
 
 
-
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('show');
+}
 
 function formatMathContent(text) {
    // Replace common math notations with LaTeX
