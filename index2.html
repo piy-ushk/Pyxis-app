@@ -8,15 +8,65 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    
-        <div class="chat-list">
-          <div class="chat-item">Chat 1</div>
-          <div class="chat-item">Chat 2</div>
-          <div class="chat-item">Chat 3</div>
-          <div class="chat-item">Chat 4</div>
-          <div class="chat-item">Chat 5</div>
+  
+ 
+    <button class="sidebar-toggle" onclick="toggleSidebar()" >☰</button>
+  <div class="sidebar  ">
+
+
+      <button class="new-chat-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4L12 20M4 12L20 12" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          New chat
+      </button>
+      
+         <div class="bottom-sidebar">
+      <div class="predefined-prompts">
+        <h3>Predefined Prompts</h3>
+        <div class="prompt-carousel">
+            <div class="prompt-card">
+                <h4>Professional Email</h4>
+                <p>Help me write a professional email about...</p>
+                <button class="use-prompt-btn" onclick="usePrompt('Help me write a professional email about...')">Use Prompt</button>
+            </div>
+            <div class="prompt-card">
+                <h4>Explain a Concept</h4>
+                <p>Explain the concept of...</p>
+                <button class="use-prompt-btn" onclick="usePrompt('Explain the concept of...')">Use Prompt</button>
+            </div>
+            <div class="prompt-card">
+                <h4>Coding Assistance</h4>
+                <p>Help me with coding...</p>
+                <button class="use-prompt-btn" onclick="usePrompt('Help me with coding...')">Use Prompt</button>
+            </div>
         </div>
-     
+        <div class="carousel-controls">
+            <button class="carousel-control" onclick="moveCarousel(-1)">&#8249;</button>
+            <button class="carousel-control" onclick="moveCarousel(1)">&#8250;</button>
+        </div>
+    </div>
+        
+        <div class="sidebar-items">
+          <ul>
+            <!-- Existing links -->
+            
+            <li><a href="index3.html">Image Generation/Analysis</a></li>  
+            <li><a href="index2.html">Chat History</a></li>
+            <li><a href="example.html">Academics</a></li>
+          </ul>
+        </div>
+      </div>
+        </div> 
+        <div class="main-container"> 
+        <div class="chat-list">
+          <a class="chat-item">Chat 1</a>
+          <a class="chat-item">Chat 2</a>
+          <a class="chat-item">Chat 3</a>
+          <a class="chat-item">Chat 4</a>
+          <a class="chat-item">Chat 5</a>
+        </div>
+     </div>
      <script src="main.js">
        
      </script>
