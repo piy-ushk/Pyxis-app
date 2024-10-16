@@ -40,13 +40,15 @@ body {
     position: fixed;
     top: 0;
     left: -280px; 
-    background-color: var(--secondary-dark);
+    mask: linear-gradient(black, black, transparent);
+    backdrop-filter: blur(10px);
+   
     border-right: 1px solid var(--border-color);
     padding: 16px;
     display: flex;
     flex-direction: column;
     z-index: 10;
-    /* transform: translateX(-100%); */
+    
     transition: left 0.3s ease;
 }
 .sidebar:hover,
@@ -99,6 +101,7 @@ body {
 }
 
 .sidebar-items li {
+    margin-left: 10px;
     margin-bottom: 10px;
 }
 
@@ -117,30 +120,7 @@ body {
 }
 
 /* Media query for mobile devices */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-    }
 
-    .sidebar.pinned + .chat-container {
-        margin-left: 0;
-    }
-    .sidebar-toggle {
-        position: fixed;
-        top: 16px;
-        left: 16px;
-        background: var(--secondary-dark);
-        color: white;
-        border: none;
-        padding: 18px;
-        cursor: pointer;
-        border-radius: 50%;
-        z-index: 100; /* Ensure the toggle is always visible */
-    }
-    .pin-button {
-        display: none;
-    }
-}
 @media (min-width: 992px) {
 .sidebar-toggle{
     display: none;
@@ -274,7 +254,7 @@ body {
     font-weight: bold;
     letter-spacing: 2px;
     background: linear-gradient(45deg, var(--primary-blue), #60a5fa);
-    -webkit-background-clip: text;
+    /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent;
 }
 
@@ -476,25 +456,7 @@ body {
 }
 
 /* Media queries for mobile devices */
-@media (max-width: 768px) {
-    .sidebar {
-        max-width: 60vh;
-    width: 55vh;
-    height: 100vh;
-    overflow-y: auto;
-    max-height: 100vh; /* Full height for scrolling */
-    position: fixed;
-    
-    }
 
-    .chat-container {
-        padding: 16px;
-    }
-
-    .chat-messages {
-        padding: 16px 0;
-    }
-}
 
 @media (min-width: 768px) {
     .sidebar {
@@ -510,40 +472,150 @@ body {
     scrollbar-color: var(--primary-blue);
  }
  /* Predefined prompts: enhanced styling */
-.predefined-prompts {
-    margin-top: 16px;
+ .predefined-prompts {
+    margin-top: 24px;
     color: var(--text-secondary);
+    overflow: hidden;
 }
 
-.predefined-prompts select {
-    padding: 8px 12px;
-    border-radius: 8px;
+.predefined-prompts h3 {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.prompt-carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.prompt-card {
+    flex: 0 0 calc(100% - 16px);
+    margin-right: 16px;
+    padding: 16px;
     background-color: var(--secondary-dark);
     border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    font-size: 14px;
-    transition: background 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.predefined-prompts select:hover, 
-.predefined-prompts select:focus {
+.prompt-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     border-color: var(--primary-blue);
-    box-shadow: 0 0 5px var(--primary-blue);
 }
+
+.prompt-card h4 {
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.prompt-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.use-prompt-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.use-prompt-btn:hover {
+    background-color: #357abd;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.carousel-control {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 8px;
+    transition: color 0.3s ease;
+}
+
+.carousel-control:hover {
+    color: var(--primary-blue);
+}
+
+
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100%; /* Full width for mobile */
-        transform: translateX(-100%);
-    }
+     
 
-    .sidebar.show {
-        transform: translateX(0); /* Expand sidebar on mobile */
-    }
+     
 
     .chat-container {
         padding: 16px; /* Adjust padding for mobile */
+    }
+    .prompt-card {
+        flex: 0 0 calc(100% - 32px);
+        margin-right: 32px;
+    }
+    .sidebar {
+        max-width: 60vh;
+    width: 55vh;
+    width: 80%; /* Full width for mobile */
+    transform: translateX(-100%);
+    height: 100vh;
+    overflow-y: auto;
+    max-height: 100vh; /* Full height for scrolling */
+    position: fixed;
+    
+    }
+
+    .chat-container {
+        padding: 16px;
+    }
+
+    .chat-messages {
+        padding: 16px 0;
+    }
+    .logo-pyxis {
+        display: flex;
+        align-items: center;
+        margin-top: 8%;
+        text-decoration: none;
+        color: var(--text-primary);
+    }
+     
+    .sidebar.show {
+        transform: translateX(0);
+        left: 0px;
+    }
+     
+    .sidebar.pinned + .chat-container {
+        margin-left: 0;
+    }
+    .sidebar-toggle {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        background: var(--secondary-dark);
+        color: white;
+        border: none;
+        padding: 18px;
+        cursor: pointer;
+        border-radius: 50%;
+        z-index: 100; /* Ensure the toggle is always visible */
+    }
+    .pin-button {
+        display: none;
     }
 }
 
