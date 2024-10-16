@@ -15,10 +15,10 @@
 <body>
   
   
-   
- <div class="main-container">
-  <button class="sidebar-toggle" onclick="toggleSidebar()" >☰</button>
-  <div class="sidebar  ">
+   <div class="main-container"> 
+ 
+      <button class="sidebar-toggle" onclick="toggleSidebar()" >☰</button>
+    <div class="sidebar  ">
   
   
         <button class="new-chat-button">
@@ -28,15 +28,31 @@
             New chat
         </button>
         
-           
-          <div class="predefined-prompts">
-            <label for="prompts">Choose a prompt:</label>
-            <select id="prompts" onchange="usePrompt(this.value)">
-                <option value="Help me write a professional email about...">"Help me write a professional email about...</option>
-                <option value="Explain the concept of...">Explain the concept of...</option>
-                <option value="Help me with coding...">Help me with coding...</option>
-            </select>
-        </div>
+           <div class="bottom-sidebar">
+        <div class="predefined-prompts">
+          <h3>Predefined Prompts</h3>
+          <div class="prompt-carousel">
+              <div class="prompt-card">
+                  <h4>Professional Email</h4>
+                  <p>Help me write a professional email about...</p>
+                  <button class="use-prompt-btn" onclick="usePrompt('Help me write a professional email about...')">Use Prompt</button>
+              </div>
+              <div class="prompt-card">
+                  <h4>Explain a Concept</h4>
+                  <p>Explain the concept of...</p>
+                  <button class="use-prompt-btn" onclick="usePrompt('Explain the concept of...')">Use Prompt</button>
+              </div>
+              <div class="prompt-card">
+                  <h4>Coding Assistance</h4>
+                  <p>Help me with coding...</p>
+                  <button class="use-prompt-btn" onclick="usePrompt('Help me with coding...')">Use Prompt</button>
+              </div>
+          </div>
+          <div class="carousel-controls">
+              <button class="carousel-control" onclick="moveCarousel(-1)">&#8249;</button>
+              <button class="carousel-control" onclick="moveCarousel(1)">&#8250;</button>
+          </div>
+      </div>
           
           <div class="sidebar-items">
             <ul>
@@ -47,7 +63,7 @@
               <li><a href="example.html">Academics</a></li>
             </ul>
           </div>
-          
+        </div>
           </div> 
            
     
@@ -96,11 +112,13 @@
                             <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" fill="currentColor"/>
                         </svg>
                     </button>
-                    <button class="input-button" id="send-button" name="Enter">
+                    <span data-state="closed" aria-describedby="radix-:rd:">
+                    <button class="input-button" id="send-button" name="Enter" aria-label="Enter" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
                         </svg>
                     </button>
+                  </span>
                 </div>
             </div>
         </div>
