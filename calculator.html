@@ -3,299 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PIXIO.ai - Your Mathematical Assistant</title>
-    <link rel="stylesheet" type="text/css" href="css.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.12.0/math.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-    <!-- Include Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Include Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-       <style>
-        
-        .Calculator_calculator-keyboard__ZqZN5{
-            --swiper-theme-color: #007aff;
-            --md-font-size: 17px;
---md-sm-margin: 12px;
---md-lg-margin: 16px;
---md-katex-scroll-margin: 20px;
---adm-font-family: "Rubik";
-font-family: Rubik,SF Pro Text,Arial,sans-serif;
-color: #000;
--webkit-tap-highlight-color: rgba(0,0,0,0);
---tab-font: 500 16px/24px "Rubik";
---tab-height: 44px;
---tab-padding: 10px 20px;
---tab-background: #ecefff;
---tab-background-hover: #f5f5f7;
---tab-background-active: #fff;
---tab-text-active: #21252e;
---tab-text-normal: #717697;
-box-sizing: border-box!important;
-margin: 0;
-padding: 0;
-scrollbar-width: thin;
-scrollbar-color: hsla(218,9%,64%,.5) transparent;
-display: grid;
-grid-template-areas: "letter-x letter-y letter-z power square_root frac square8" "number-7 number-8 number-9 add letter-e natural_log sine" "number-4 number-5 number-6 subtract_or_negative_sign pi logarithm_to_base_n cosine" "number-1 number-2 number-3 times left_parenthesis right_parenthesis tangent" "number-0 number-0 dot divide_or_create_fraction move_one_space_left move_one_space_right delete";
-grid-template-columns: repeat(7,110px);
-grid-template-rows: repeat(5,40px);
-grid-gap: 8px 8px;
-}
-
-.Calculator_calculator-math-textarea__dz44n{
-    --swiper-theme-color: #007aff;
---md-font-size: 17px;
---md-sm-margin: 12px;
---md-lg-margin: 16px;
---md-katex-scroll-margin: 20px;
---adm-font-family: "Rubik";
-font-family: Rubik,SF Pro Text,Arial,sans-serif;
-color: #000;
--webkit-tap-highlight-color: rgba(0,0,0,0);
---tab-font: 500 16px/24px "Rubik";
---tab-height: 44px;
---tab-padding: 10px 20px;
---tab-background: #ecefff;
---tab-background-hover: #f5f5f7;
---tab-background-active: #fff;
---tab-text-active: #21252e;
---tab-text-normal: #717697;
-box-sizing: border-box!important;
-margin: 0;
-padding: 0;
-scrollbar-width: thin;
-scrollbar-color: hsla(218,9%,64%,.5) transparent;
-display: flex;
-align-items: flex-end;
-}
-.Calculator_calculator-solve-btn__bcwaE {
-    --swiper-theme-color: #007aff;
---md-font-size: 17px;
---md-sm-margin: 12px;
---md-lg-margin: 16px;
---md-katex-scroll-margin: 20px;
---adm-font-family: "Rubik";
---tab-font: 500 16px/24px "Rubik";
---tab-height: 44px;
---tab-padding: 10px 20px;
---tab-background: #ecefff;
---tab-background-hover: #f5f5f7;
---tab-background-active: #fff;
---tab-text-active: #21252e;
---tab-text-normal: #717697;
-scrollbar-color: hsla(218,9%,64%,.5) transparent;
-box-sizing: border-box!important;
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 0;
-padding: 0;
-outline: none;
-text-align: center;
-font-size: 16px;
--webkit-tap-highlight-color: rgba(0,0,0,0);
-font-family: Rubik,SF Pro Text,Arial,sans-serif;
-cursor: not-allowed;
-background: #ff013e;
-color: #fff;
-border: 1px solid transparent;
-background-color: #ffccd8;
-line-height: 48px;
-border-radius: 12px;
-font-weight: 600;
-width: 116px!important;
-height: 54px!important;
-margin-left: 8px!important;
-flex-shrink: 0;
-}
-       </style>
-    
+    <title>Smart Calculator</title>
+    <style>
+       body {
+            background-color: #1a2332;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #2b3e50;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .display {
+            width: 100%;
+            height: 100px;
+            background: white;
+            color: black;
+            font-size: 24px;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            resize: none;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #34495e;
+            color: white;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #3a4457;
+        }
+        .solve-btn {
+            background: #e74c3c;
+            color: white;
+            grid-column: span 4;
+            padding: 15px;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .solve-btn:hover {
+            background: #c0392b;
+        }
+    </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="p-4">
-            <h1 class="text-xl font-bold text-blue-500">PIXIO.ai for Academics</h1>
+    <div class="calculator">
+        <h1>Smart Calculator</h1>
+        <textarea class="display" id="display" rows="3"></textarea>
+        <button class="solve-btn" onclick="solveMathProblem()">Solve</button>
+         
+        <div class="buttons">
+            <button onclick="addToDisplay('x')">x</button>
+            <button onclick="addToDisplay('y')">y</button>
+            <button onclick="addToDisplay('z')">z</button>
+            <button onclick="addToDisplay('^2')">x²</button>
+            <button onclick="addToDisplay('√')">√</button>
+            <button onclick="addToDisplay('=')">=</button>
+            <button onclick="clearLastChar()">←</button>
+            
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <button onclick="addToDisplay('+')">+</button>
+            <button onclick="addToDisplay('e')">e</button>
+            <button onclick="addToDisplay('ln')">ln</button>
+            <button onclick="addToDisplay('sin')">sin</button>
+            
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button onclick="addToDisplay('-')">-</button>
+            <button onclick="addToDisplay('π')">π</button>
+            <button onclick="addToDisplay('log')">log</button>
+            <button onclick="addToDisplay('cos')">cos</button>
+            
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('3')">3</button>
+            <button onclick="addToDisplay('*')">×</button>
+            <button onclick="addToDisplay('(')">(</button>
+            <button onclick="addToDisplay(')')">)</button>
+            <button onclick="addToDisplay('tan')">tan</button>
+            
+            <button onclick="addToDisplay('0')">0</button>
+            <button onclick="addToDisplay('.')">.</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="addToDisplay('/')">/</button>
+            <button onclick="moveLeft()">←</button>
+            <button onclick="moveRight()">→</button>
+            <button onclick="deleteChar()">⌫</button>
         </div>
-        <nav>
-            <a href="example.html" class="nav-item">
-                <i data-lucide="home" class="w-5 h-5 mr-3"></i>
-                Home
-            </a>
-            <a href="calculator.html" class="nav-item active">
-                <i data-lucide="calculator" class="w-5 h-5 mr-3"></i>
-                Calculator
-            </a>
-            <a href="writer-helper.html" class="nav-item">
-                <i data-lucide="pen-tool" class="w-5 h-5 mr-3"></i>
-                Writer Helper
-            </a>
-            <a href="#" class="nav-item">
-                <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
-                Study Tools
-            </a>
-            <a href="#" class="nav-item">
-                <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
-                Settings
-            </a>
-        </nav>
     </div>
-    <!-- Calculator Section (hidden by default) -->
-    <div class="main-content">
-        <h2 class="text-2xl font-bold mb-6">Smart Calculator</h2>
-        <div class="Calculator_calculator-math-textarea__dz44n">
-            <div class="Calculator_inputWrap__NQn00">
-                <div class="MathInput_container__fESsG Calculator_input__39UrF">
-                    <span id="math-quill-textarea-calculator-math" class="MathInput_textarea__w_gtA mq-editable-field mq-math-mode">
-                        <span class="mq-textarea">
-                            <textarea autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" x-palm-disable-ste-all="true"></textarea>
-                        </span>
-                        <span class="mq-root-block mq-empty" mathquill-block-id="1">
 
-                        </span>
-                    </span>
-                    <span id="math-quill-placeholder-calculator-math" class="MathInput_placeholder__aTm6f mq-math-mode" style="display: inline-block;">
-                        <span class="mq-selectable">$ax^2+bx+c=0$</span>
-                        <span class="mq-root-block mq-hasCursor" mathquill-block-id="3">
-                            <var mathquill-command-id="4">a</var><var mathquill-command-id="6">x</var>
-                            <span class="mq-supsub mq-non-leaf mq-sup-only" mathquill-command-id="8">
-                                <span class="mq-sup" mathquill-block-id="10">
-                                    <span mathquill-command-id="9">2</span>
-                                </span>
-                            </span>
-                            <span mathquill-command-id="12" class="mq-binary-operator">+</span>
-                            <var mathquill-command-id="14">b</var><var mathquill-command-id="16">x</var>
-                            <span mathquill-command-id="18" class="mq-binary-operator">+</span>
-                            <var mathquill-command-id="20">c</var>
-                            <span class="mq-binary-operator" mathquill-command-id="22">=</span>
-                            <span mathquill-command-id="24">0</span>
-                            <span class="mq-cursor">​</span>
-                        </span>
-                    </span>
-                    
-                </div>
-            </div>
-            <button class="Button_btn__00XCn Button_btn-large__wlH24 Button_btn-primary__y5bOC Button_btn-primary-default-disabled__HsDCX Button_btn-disabled__MlRuJ Button_btn-bold__108ic Calculator_calculator-solve-btn__bcwaE">Solve</button>
-    </div>
-        <div class="calculator">
-            <div class="MathKeyboard_mathematics-keyboard__fp6_h Calculator_calculator-keyboard__ZqZN5">
-                <button name="number-0" style="grid-area:number-0" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">0</button>
-                <button name="number-1" style="grid-area:number-1" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">1</button>
-                <button name="number-2" style="grid-area:number-2" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">2</button>
-                <button name="number-3" style="grid-area:number-3" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">3</button>
-                <button name="number-4" style="grid-area:number-4" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">4</button>
-                <button name="number-5" style="grid-area:number-5" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">5</button>
-                <button name="number-6" style="grid-area:number-6" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">6</button>
-                <button name="number-7" style="grid-area:number-7" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">7</button>
-                <button name="number-8" style="grid-area:number-8" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">8</button>
-                <button name="number-9" style="grid-area:number-9" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">9</button>
-                <button name="power" style="grid-area:power" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-                    <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="8.89746" y="7.40384" width="8.46154" height="10.5769" rx="1.05769" stroke="#3E424B" stroke-width="1.7" stroke-linejoin="round"></rect>
-                    <rect x="19.4746" y="4.23077" width="4.23077" height="5.28846" rx="1.05769" stroke="#3E424B" stroke-width="1.4" stroke-linejoin="round"></rect>
-                </svg>
-            </button>
-            <button name="pi" style="grid-area:pi" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.91207 17.9808C8.36966 17.9808 8.09846 17.7175 8.09846 17.1911V16.9279L8.40954 16.2578C9.60603 13.7372 10.4755 11.5596 11.0179 9.72502L11.2093 9.1507H10.4436C9.83735 9.1507 9.40661 9.17463 9.15136 9.22249C8.89611 9.27035 8.58503 9.42191 8.2181 9.67716C8.04262 9.78883 7.86714 9.93241 7.69165 10.1079C7.51617 10.2834 7.36461 10.4509 7.23699 10.6104C7.10936 10.7699 7.03757 10.8657 7.02162 10.8976C6.98971 10.9135 6.87006 10.9215 6.66267 10.9215C6.35956 10.9215 6.20801 10.8417 6.20801 10.6822C6.20801 10.5865 6.35956 10.3073 6.66267 9.84467C6.96578 9.38203 7.40449 8.88748 7.97881 8.36102C8.55312 7.83457 9.11946 7.53146 9.67782 7.45169C9.78949 7.41979 11.5842 7.40383 15.062 7.40383C17.6145 7.40383 18.9227 7.41181 18.9865 7.42776C19.3055 7.53944 19.4651 7.76278 19.4651 8.0978C19.4651 8.59234 19.2098 8.92736 18.6993 9.10285C18.6036 9.13475 18.0532 9.1507 17.0482 9.1507H15.5167L15.4449 9.55751C15.2534 10.7061 15.1577 11.6553 15.1577 12.4051C15.1577 13.2347 15.2295 13.9765 15.3731 14.6306C15.5167 15.2847 15.6682 15.7952 15.8278 16.1621C15.9873 16.529 16.0671 16.7524 16.0671 16.8321C16.0671 17.1034 15.9554 17.3586 15.732 17.5979C15.5087 17.8372 15.2215 17.9568 14.8706 17.9568C14.6951 17.9568 14.5515 17.9329 14.4398 17.8851C14.3282 17.8372 14.2005 17.6458 14.057 17.3107C13.9134 16.9757 13.7858 16.4971 13.6741 15.875C13.6581 15.7314 13.6502 15.3804 13.6502 14.8221C13.6502 14.0403 13.7219 13.2028 13.8655 12.3094C14.0091 11.4161 14.1527 10.6822 14.2963 10.1079C14.4398 9.53358 14.5196 9.21452 14.5356 9.1507H12.1904L12.1665 9.24642C12.1665 9.29428 12.015 9.92443 11.7118 11.1369C11.4087 12.3493 11.0657 13.6335 10.6829 14.9896C10.3 16.3456 10.0527 17.1193 9.94105 17.3107C9.76556 17.7574 9.42257 17.9808 8.91207 17.9808Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path>
-                </svg>
-            </button>
-            <button name="times" style="grid-area:times" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-                <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.81055 8.95282L17.2896 16.4318" stroke="#322211" stroke-width="1.48077" stroke-linecap="round"></path>
-                    <path d="M9.81055 16.4318L17.2896 8.95278" stroke="#322211" stroke-width="2" stroke-linecap="round"></path>
-                </svg>
-            </button>
-            <button name="divide_or_create_fraction" style="grid-area:divide_or_create_fraction" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-                <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.28223 13H18.8591" stroke="#322211" stroke-width="2" stroke-linecap="round"></path>
-                    <circle cx="13.5713" cy="8.36531" r="1.5" fill="#322211"></circle>
-                    <circle cx="13.5693" cy="17.8077" r="1.5" fill="#322211"></circle>
-                </svg>
-            </button>
-            <button name="add" style="grid-area:add" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-                <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.26172 12.6923H18.8386" stroke="#322211" stroke-width="2" stroke-linecap="round"></path>
-                    <path d="M13.5498 17.9808V7.40385" stroke="#322211" stroke-width="2" stroke-linecap="round"></path>
-                </svg>
-            </button>
-            <button name="subtract_or_negative_sign" style="grid-area:subtract_or_negative_sign" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-                <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.26172 12.6923H18.8386" stroke="#322211" stroke-width="2" stroke-linecap="round"></path>
-                </svg>
-            </button>
-            <button name="left_parenthesis" style="grid-area:left_parenthesis" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_4219_32714)"><path d="M10.2309 12.984C10.2309 11.2691 10.592 9.72913 11.314 8.36401C12.0473 6.9876 13.0966 5.8876 14.4617 5.06401L15.9171 6.73939C14.8453 7.45016 14.0273 8.3358 13.4632 9.39631C12.9104 10.4568 12.634 11.6527 12.634 12.984C12.634 14.3153 12.9104 15.5112 13.4632 16.5717C14.0273 17.6322 14.8453 18.5179 15.9171 19.2286L14.4617 20.904C13.0966 20.0804 12.0473 18.9804 11.314 17.604C10.592 16.2389 10.2309 14.6989 10.2309 12.984Z" fill="#3E424B"></path></g>
-                <defs><clipPath id="clip0_4219_32714"><rect width="25.3846" height="25.3846" fill="white" transform="translate(0.142578)"></rect></clipPath></defs>
-            </svg>
-        </button>
-        <button name="right_parenthesis" style="grid-area:right_parenthesis" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_4219_32733)"><path d="M15.7294 12.984C15.7294 14.6989 15.3627 16.2389 14.6294 17.604C13.9073 18.9804 12.8637 20.0804 11.4986 20.904L10.0432 19.2286C11.115 18.5179 11.9273 17.6322 12.4801 16.5717C13.0442 15.5112 13.3263 14.3153 13.3263 12.984C13.3263 11.6527 13.0442 10.4568 12.4801 9.39631C11.9273 8.3358 11.115 7.45016 10.0432 6.73939L11.4986 5.06401C12.8637 5.8876 13.9073 6.9876 14.6294 8.36401C15.3627 9.72913 15.7294 11.2691 15.7294 12.984Z" fill="#3E424B"></path></g>
-            <defs><clipPath id="clip0_4219_32733"><rect width="25.3846" height="25.3846" fill="white" transform="translate(0.428711)"></rect></clipPath></defs>
-        </svg>
-    </button>
-    <button name="dot" style="grid-area:dot" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">.</button>
-    <button name="move_one_space_left" style="grid-area:move_one_space_left" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-        <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 6.9454L6.58697 12.5864L12 18.2275" stroke="#3E424B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-            <line x1="1" y1="-1" x2="13.2904" y2="-1" transform="matrix(1 0 0 -1 6.80273 11.7857)" stroke="#3E424B" stroke-width="2" stroke-linecap="round"></line>
-        </svg>
-    </button>
-    <button name="move_one_space_right" style="grid-area:move_one_space_right" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14.833 6.9454L20.246 12.5864L14.833 18.2275" stroke="#3E424B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-        <line x1="19.0303" y1="12.7857" x2="6.73989" y2="12.7857" stroke="#3E424B" stroke-width="2" stroke-linecap="round"></line>
-    </svg>
-</button>
-<button name="delete" style="grid-area:delete" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR"><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g clip-path="url(#clip0_4219_32821)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.12897 6.40589C7.64782 5.88703 7.90725 5.6276 8.21 5.44208C8.47842 5.27759 8.77105 5.15638 9.07716 5.08289C9.42242 5 9.78931 5 10.5231 5H16.7349C18.415 5 19.2551 5 19.8968 5.32698C20.4613 5.6146 20.9203 6.07354 21.2079 6.63803C21.5349 7.27976 21.5349 8.11984 21.5349 9.8V14.2C21.5349 15.8802 21.5349 16.7202 21.2079 17.362C20.9203 17.9265 20.4613 18.3854 19.8968 18.673C19.2551 19 18.415 19 16.7349 19H10.5231C9.78931 19 9.42242 19 9.07716 18.9171C8.77105 18.8436 8.47842 18.7224 8.21 18.5579C7.90725 18.3724 7.64782 18.113 7.12897 17.5941L7.12897 17.5941L3.79759 14.2627C3.00556 13.4707 2.60955 13.0747 2.46117 12.618C2.33065 12.2163 2.33065 11.7837 2.46117 11.382C2.60955 10.9253 3.00556 10.5293 3.7976 9.73726L7.12897 6.40589ZM10.8277 9.04289C11.2183 8.65237 11.8514 8.65237 12.242 9.04289L13.7849 10.5858L15.3277 9.04289C15.7183 8.65237 16.3514 8.65237 16.742 9.04289C17.1325 9.43342 17.1325 10.0666 16.742 10.4571L15.1991 12L16.742 13.5429C17.1325 13.9334 17.1325 14.5666 16.742 14.9571C16.3514 15.3476 15.7183 15.3476 15.3277 14.9571L13.7849 13.4142L12.242 14.9571C11.8514 15.3476 11.2183 15.3476 10.8277 14.9571C10.4372 14.5666 10.4372 13.9334 10.8277 13.5429L12.3706 12L10.8277 10.4571C10.4372 10.0666 10.4372 9.43342 10.8277 9.04289Z" fill="#646A77"></path></g>
-    <defs><clipPath id="clip0_4219_32821"><rect width="24" height="24" fill="white" transform="translate(0.285156)"></rect></clipPath></defs>
-</svg>
-</button>
-<button name="square_root" style="grid-area:square_root" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10.6992" y="8.09973" width="7" height="10" rx="1" stroke="#3E424B" stroke-width="1.6" stroke-linejoin="round"></rect>
-        <path d="M18.7969 5.49988H7.99687L5.99883 18L3.79688 13.4999" stroke="#3E424B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
-</button>
-<button name="square8" style="grid-area:square8" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="11.0059" y="14.6001" width="7" height="7" rx="1" stroke="#3E424B" stroke-width="1.7" stroke-linejoin="round"></rect>
-        <rect x="11.0059" y="2.30005" width="7" height="7" rx="1" stroke="#3E424B" stroke-width="1.7" stroke-linejoin="round"></rect>
-        <path d="M9.80273 12H19.2027" stroke="#3E424B" stroke-width="1.6" stroke-linecap="round"></path>
-        <rect x="2.21484" y="9" width="4" height="5" rx="1" stroke="#3E424B" stroke-width="1.7" stroke-linejoin="round"></rect>
-    </svg>
-</button>
-<button name="natural_log" style="grid-area:natural_log" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6.41075 16.3455C6.41075 16.7383 6.55956 16.9348 6.85719 16.9348C7.29767 16.9348 7.67268 16.3098 7.98221 15.0597C8.05364 14.8216 8.11317 14.6966 8.16079 14.6847C8.1846 14.6728 8.24412 14.6669 8.33936 14.6669H8.41079C8.51794 14.6669 8.58937 14.6669 8.62508 14.6669C8.6608 14.6669 8.69056 14.6788 8.71437 14.7026C8.73818 14.7264 8.75009 14.768 8.75009 14.8276C8.73818 14.899 8.72032 14.9942 8.69651 15.1133C8.6727 15.2323 8.60723 15.4585 8.50008 15.7919C8.39294 16.1252 8.27389 16.405 8.14293 16.6312C8.01197 16.8574 7.82745 17.0776 7.58935 17.2919C7.35124 17.5062 7.07743 17.6074 6.7679 17.5955C6.33932 17.5955 5.9405 17.4645 5.57144 17.2026C5.20239 16.9407 5.01191 16.5002 5 15.8812C5 15.7383 5.00595 15.6371 5.01786 15.5776L6.1786 10.9703C6.92862 7.93456 7.30362 6.36905 7.30362 6.2738C7.30362 6.23809 7.29767 6.20833 7.28577 6.18452C7.27386 6.16071 7.25005 6.1369 7.21434 6.11309C7.17862 6.08928 7.14886 6.07737 7.12505 6.07737C7.10124 6.07737 7.05362 6.07142 6.98219 6.05951C6.91076 6.04761 6.86314 6.04166 6.83933 6.04166C6.81552 6.04166 6.76195 6.0357 6.67861 6.0238C6.59528 6.01189 6.53575 6.01189 6.50003 6.0238C6.38098 6.0238 6.3036 6.0238 6.26789 6.0238C6.23217 6.0238 6.18455 6.01785 6.12503 6.00594C6.0655 5.99404 6.02979 5.97618 6.01788 5.95237C6.00598 5.92856 6.00002 5.89284 6.00002 5.84522C6.00002 5.82141 6.01193 5.73808 6.03574 5.59522C6.09526 5.36902 6.16074 5.24402 6.23217 5.22021C6.3036 5.1964 6.73218 5.16068 7.51792 5.11306C7.69649 5.10116 7.89888 5.08925 8.12507 5.07735C8.35127 5.06544 8.52984 5.04759 8.6608 5.02378C8.79175 4.99997 8.85723 4.99401 8.85723 5.00592C9.00009 5.00592 9.07152 5.05354 9.07152 5.14878C9.07152 5.27973 8.63699 7.06549 7.76792 10.506C6.89885 13.9466 6.45241 15.7502 6.4286 15.9169C6.4286 15.9407 6.4286 15.9883 6.4286 16.0597C6.4286 16.1312 6.42265 16.1907 6.41075 16.2383V16.3455Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path>
-        <path d="M10.0156 12.2739C10.0275 12.2025 10.0454 12.1072 10.0692 11.9882C10.093 11.8691 10.1644 11.6429 10.2835 11.3096C10.4025 10.9763 10.5216 10.6965 10.6406 10.4703C10.7597 10.2441 10.9561 10.0239 11.2299 9.80956C11.5038 9.59527 11.7776 9.49408 12.0514 9.50598C12.48 9.50598 12.8371 9.61313 13.1228 9.82742C13.4086 10.0417 13.5871 10.2441 13.6586 10.4346C13.73 10.6251 13.7657 10.7501 13.7657 10.8096C13.7657 10.8334 13.7717 10.8453 13.7836 10.8453L13.98 10.6489C14.7062 9.88695 15.5336 9.50598 16.4622 9.50598C17.1051 9.50598 17.6229 9.6667 18.0158 9.98814C18.4087 10.3096 18.6111 10.7798 18.623 11.3989C18.6349 12.0179 18.4087 12.9525 17.9444 14.2025C17.4801 15.4526 17.2539 16.2085 17.2658 16.4704C17.2658 16.78 17.367 16.9347 17.5694 16.9347C17.6408 16.9347 17.6944 16.9288 17.7301 16.9169C18.0753 16.8573 18.3849 16.6312 18.6587 16.2383C18.9325 15.8454 19.1408 15.3692 19.2837 14.8097C19.3075 14.7144 19.4266 14.6668 19.6408 14.6668C19.8789 14.6668 19.998 14.7144 19.998 14.8097C19.998 14.8216 19.9742 14.9109 19.9266 15.0775C19.8313 15.4228 19.7004 15.7621 19.5337 16.0954C19.367 16.4288 19.0932 16.7621 18.7123 17.0954C18.3313 17.4288 17.9206 17.5895 17.4801 17.5776C16.9205 17.5776 16.5158 17.4169 16.2658 17.0954C16.0158 16.774 15.8908 16.4407 15.8908 16.0954C15.8908 15.8692 16.1051 15.1549 16.5336 13.9525C16.9622 12.7501 17.1825 11.8453 17.1944 11.2382C17.1944 10.5358 16.9325 10.1846 16.4086 10.1846H16.3193C15.2955 10.1846 14.4324 10.7858 13.73 11.9882L13.605 12.2025L13.0157 14.5954C12.6228 16.1549 12.3966 16.9943 12.3371 17.1133C12.1823 17.4347 11.9264 17.5955 11.5692 17.5955C11.4145 17.5955 11.2895 17.5597 11.1942 17.4883C11.099 17.4169 11.0335 17.3455 10.9978 17.274C10.9621 17.2026 10.9502 17.1431 10.9621 17.0954C10.9621 16.9407 11.1883 15.9704 11.6407 14.1847C12.0931 12.3989 12.3312 11.4286 12.355 11.2739C12.3669 11.2144 12.3728 11.0774 12.3728 10.8632C12.3728 10.3989 12.23 10.1667 11.9442 10.1667C11.4918 10.1667 11.1168 10.762 10.8192 11.9525C10.7478 12.1906 10.7121 12.3156 10.7121 12.3275C10.6883 12.3989 10.5752 12.4346 10.3728 12.4346H10.1228C10.0513 12.3632 10.0156 12.3096 10.0156 12.2739Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path>
-    </svg>
-</button>
-<button name="logarithm_to_base_n" style="grid-area:logarithm_to_base_n" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-    <svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5.20236 16.3031C5.20236 16.6945 5.35062 16.8902 5.64713 16.8902C6.08598 16.8902 6.45959 16.2676 6.76796 15.0222C6.83913 14.785 6.89843 14.6604 6.94587 14.6486C6.96959 14.6367 7.0289 14.6308 7.12378 14.6308H7.19495C7.30169 14.6308 7.37286 14.6308 7.40844 14.6308C7.44402 14.6308 7.47367 14.6426 7.49739 14.6664C7.52111 14.6901 7.53297 14.7316 7.53297 14.7909C7.52111 14.8621 7.50332 14.957 7.4796 15.0756C7.45588 15.1942 7.39065 15.4195 7.2839 15.7516C7.17716 16.0837 7.05855 16.3624 6.92808 16.5878C6.79761 16.8131 6.61378 17.0326 6.37656 17.2461C6.13935 17.4595 5.86656 17.5604 5.55818 17.5485C5.1312 17.5485 4.73386 17.418 4.36619 17.1571C3.99851 16.8962 3.80874 16.4573 3.79688 15.8406C3.79688 15.6982 3.80281 15.5974 3.81467 15.5381L4.97108 10.9481C5.7183 7.9236 6.09191 6.36393 6.09191 6.26904C6.09191 6.23346 6.08598 6.20381 6.07412 6.18009C6.06226 6.15637 6.03853 6.13264 6.00295 6.10892C5.96737 6.0852 5.93772 6.07334 5.914 6.07334C5.89028 6.07334 5.84283 6.06741 5.77167 6.05555C5.70051 6.04369 5.65306 6.03776 5.62934 6.03776C5.60562 6.03776 5.55225 6.03183 5.46922 6.01997C5.3862 6.00811 5.3269 6.00811 5.29131 6.01997C5.17271 6.01997 5.09561 6.01997 5.06003 6.01997C5.02445 6.01997 4.97701 6.01404 4.9177 6.00218C4.8584 5.99032 4.82282 5.97253 4.81096 5.9488C4.7991 5.92508 4.79317 5.8895 4.79317 5.84206C4.79317 5.81834 4.80503 5.73531 4.82875 5.59299C4.88805 5.36763 4.95329 5.2431 5.02445 5.21938C5.09561 5.19565 5.5226 5.16007 6.3054 5.11263C6.48331 5.10077 6.68494 5.08891 6.91029 5.07705C7.13564 5.06519 7.31355 5.0474 7.44402 5.02368C7.57449 4.99995 7.63972 4.99402 7.63972 5.00589C7.78205 5.00589 7.85321 5.05333 7.85321 5.14821C7.85321 5.27868 7.4203 7.05777 6.55447 10.4855C5.68865 13.9132 5.24387 15.7101 5.22015 15.8762C5.22015 15.8999 5.22015 15.9473 5.22015 16.0185C5.22015 16.0896 5.21422 16.1489 5.20236 16.1964V16.3031Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path>
-        <path d="M12.0023 17.5486C11.1128 17.5486 10.3952 17.258 9.84963 16.6768C9.30404 16.0957 9.03125 15.3959 9.03125 14.5775C9.03125 13.8066 9.20916 13.0771 9.56498 12.3892C9.9208 11.7013 10.4071 11.1023 11.0238 10.5923C11.9252 9.86882 12.8444 9.50708 13.7814 9.50708C14.161 9.50708 14.3982 9.51301 14.4931 9.52487C14.6473 9.56045 14.8014 9.60196 14.9556 9.6494C15.1098 9.69685 15.3174 9.79173 15.5783 9.93406C15.8393 10.0764 16.0527 10.2543 16.2188 10.4678C16.3848 10.6813 16.539 10.9719 16.6814 11.3395C16.8237 11.7072 16.8948 12.1223 16.8948 12.5849C16.8948 13.854 16.3848 14.9985 15.3648 16.0186C14.3448 17.0386 13.224 17.5486 12.0023 17.5486ZM10.5791 15.218C10.5791 15.811 10.7333 16.238 11.0416 16.4989C11.35 16.7599 11.6999 16.8903 12.0913 16.8903C12.6132 16.8903 13.1054 16.7005 13.5679 16.321C14.0305 15.9415 14.3982 15.4433 14.671 14.8266C14.7777 14.5775 14.9141 14.1387 15.0802 13.51C15.2462 12.8814 15.3292 12.3358 15.3292 11.8733C15.3292 11.3514 15.2225 10.9541 15.009 10.6813C14.7244 10.3255 14.3448 10.1476 13.8704 10.1476C13.1232 10.1476 12.4649 10.4915 11.8956 11.1794C11.4567 11.7013 11.1306 12.3951 10.9171 13.261C10.7036 14.1268 10.5909 14.7791 10.5791 15.218Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path>
-        <path d="M22.5855 16.5878C22.4076 16.742 22.1467 16.9081 21.8027 17.086C21.4588 17.2639 21.097 17.3529 20.7175 17.3529C19.9703 17.3529 19.3713 17.086 18.9206 16.5523C18.4699 16.0185 18.2386 15.3365 18.2268 14.5063C18.2268 13.2609 18.6834 12.1164 19.5967 11.0727C20.5099 10.0289 21.524 9.50112 22.6389 9.48926C23.1964 9.48926 23.7123 9.77391 24.1867 10.3432L24.2401 10.2721C24.2638 10.2365 24.2935 10.2009 24.3291 10.1653C24.3646 10.1297 24.418 10.0823 24.4892 10.023C24.5603 9.96368 24.6374 9.92217 24.7205 9.89845C24.8035 9.87473 24.8984 9.85694 25.0051 9.84508C25.1712 9.84508 25.3076 9.89845 25.4143 10.0052C25.5211 10.1119 25.5804 10.2246 25.5922 10.3432C25.5922 10.5211 25.2542 11.9563 24.5781 14.6486C23.9021 17.341 23.5463 18.7168 23.5107 18.7761C23.2972 19.4166 22.8405 19.9444 22.1408 20.3595C21.441 20.7746 20.6404 20.9881 19.739 21C18.0666 21 17.2305 20.5967 17.2305 19.7902C17.2305 19.4818 17.3372 19.209 17.5507 18.9718C17.7642 18.7346 18.037 18.616 18.3691 18.616C18.547 18.616 18.713 18.6694 18.8672 18.7761C19.0214 18.8829 19.1044 19.0667 19.1163 19.3277C19.1163 19.4463 19.1044 19.5589 19.0807 19.6657C19.057 19.7724 19.0155 19.8554 18.9562 19.9148C18.8969 19.9741 18.8494 20.0334 18.8139 20.0927C18.7783 20.152 18.7368 20.1994 18.6893 20.235L18.6537 20.2706H18.6715C18.7901 20.3062 19.146 20.3239 19.739 20.3239C20.1897 20.3239 20.5455 20.2528 20.8064 20.1105C21.0792 19.98 21.3342 19.7843 21.5715 19.5234C21.8087 19.2624 21.9747 18.9837 22.0696 18.6872C22.1408 18.4618 22.2357 18.0941 22.3543 17.5841C22.5084 17.0148 22.5855 16.6827 22.5855 16.5878ZM23.8843 11.5174L23.8131 11.3217C23.7775 11.1913 23.7479 11.1023 23.7242 11.0549C23.7004 11.0074 23.6649 10.9244 23.6174 10.8058C23.57 10.6872 23.5107 10.6042 23.4395 10.5567C23.3683 10.5093 23.2913 10.444 23.2082 10.361C23.1252 10.278 23.0185 10.2246 22.888 10.2009C22.7575 10.1772 22.6271 10.1594 22.4966 10.1475C21.9747 10.1475 21.4706 10.4618 20.9844 11.0904C20.6285 11.553 20.332 12.2587 20.0948 13.2076C19.8576 14.1564 19.739 14.8443 19.739 15.2713C19.739 16.2083 20.1067 16.6768 20.842 16.6768C21.5062 16.6768 22.1586 16.2617 22.799 15.4314L22.9414 15.2535L23.8843 11.5174Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path>
-        <rect x="26.7031" y="15" width="6" height="8" rx="1" stroke="#3E424B" stroke-width="1.6" stroke-linejoin="round"></rect></svg></button><button name="sine" style="grid-area:sine" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR"><svg width="37" height="24" viewBox="0 0 37 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.30617 11.1322C8.30617 10.7576 8.39983 10.3771 8.58713 9.9908C8.77443 9.60449 9.10221 9.24745 9.57047 8.91967C10.0387 8.59189 10.6065 8.43385 11.2738 8.44556C11.9995 8.44556 12.5263 8.60359 12.8541 8.91967C13.1819 9.23574 13.3516 9.58693 13.3633 9.97324C13.3633 10.3478 13.2638 10.623 13.0648 10.7985C12.8658 10.9741 12.6434 11.0678 12.3976 11.0795C12.2454 11.0795 12.1049 11.0327 11.9761 10.939C11.8474 10.8454 11.7771 10.6932 11.7654 10.4825C11.7654 10.2952 11.8181 10.1313 11.9235 9.9908C12.0288 9.85033 12.1283 9.74497 12.222 9.67473C12.3156 9.60449 12.3917 9.56937 12.4502 9.56937C12.462 9.56937 12.4678 9.56352 12.4678 9.55181C12.4678 9.51669 12.4268 9.46402 12.3449 9.39378C12.2629 9.32354 12.1166 9.25915 11.9059 9.20062C11.6952 9.14209 11.4669 9.10697 11.2211 9.09526C10.6592 9.09526 10.2494 9.24745 9.9919 9.55181C9.73436 9.85618 9.59973 10.1664 9.58803 10.4825C9.58803 10.7751 9.69924 10.98 9.92166 11.0971C10.1441 11.2141 10.466 11.3136 10.8874 11.3956C11.3089 11.4775 11.6132 11.5653 11.8005 11.659C12.5732 11.9985 12.9595 12.5604 12.9595 13.3447C12.9595 13.6725 12.8951 14.0003 12.7663 14.328C12.6375 14.6558 12.4444 14.9836 12.1869 15.3114C11.9293 15.6391 11.5606 15.8967 11.0806 16.084C10.6006 16.2713 10.0504 16.3708 9.42999 16.3825C8.5286 16.3825 7.8906 16.2128 7.51599 15.8733C7.14139 15.5338 6.94823 15.1358 6.93652 14.6792C6.93652 14.2227 7.05944 13.8949 7.30528 13.6959C7.55111 13.4969 7.80865 13.3974 8.0779 13.3974C8.2535 13.3974 8.41739 13.45 8.56957 13.5554C8.72175 13.6608 8.8037 13.8422 8.8154 14.0998C8.8154 14.4041 8.71005 14.6617 8.49933 14.8724C8.28861 15.0831 8.10717 15.1885 7.95498 15.1885C7.93157 15.2002 7.91401 15.206 7.9023 15.206C7.8906 15.206 7.88474 15.2177 7.88474 15.2411C7.89645 15.2763 7.94328 15.3231 8.02522 15.3816C8.10717 15.4401 8.28861 15.5162 8.56957 15.6099C8.85052 15.7035 9.17245 15.7445 9.53535 15.7328C9.95678 15.7328 10.3197 15.6684 10.624 15.5396C10.9284 15.4109 11.1508 15.247 11.2913 15.048C11.4318 14.849 11.5313 14.6675 11.5898 14.5036C11.6484 14.3397 11.6776 14.1934 11.6776 14.0646C11.6776 13.7369 11.5547 13.491 11.3089 13.3271C11.063 13.1632 10.7821 13.0637 10.466 13.0286C10.1499 12.9935 9.8046 12.9057 9.42999 12.7652C9.05538 12.6247 8.78028 12.4199 8.60469 12.1506C8.40568 11.858 8.30617 11.5185 8.30617 11.1322Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path><path d="M17.4706 5.67109C17.4706 5.39014 17.5818 5.1443 17.8042 4.93359C18.0267 4.72287 18.2842 4.61166 18.5769 4.59996C18.7876 4.59996 18.9632 4.67019 19.1037 4.81067C19.2441 4.95115 19.3202 5.12675 19.3319 5.33746C19.3319 5.60671 19.2149 5.85254 18.9807 6.07496C18.7466 6.29739 18.4891 6.41445 18.2081 6.42616C18.0325 6.42616 17.8686 6.36763 17.7165 6.25056C17.5643 6.1335 17.4823 5.94034 17.4706 5.67109ZM14.6084 11.1673C14.6084 11.0736 14.6611 10.8922 14.7664 10.6229C14.8718 10.3537 15.0123 10.0551 15.1879 9.72737C15.3635 9.39959 15.621 9.10107 15.9605 8.83183C16.3 8.56258 16.6512 8.43381 17.0141 8.44551C17.4706 8.44551 17.8511 8.58014 18.1554 8.84939C18.4598 9.11863 18.6178 9.48153 18.6296 9.93808C18.6296 10.1371 18.5476 10.4649 18.3837 10.9214C18.2198 11.378 17.9857 11.9926 17.6813 12.7652C17.377 13.5378 17.1311 14.1992 16.9438 14.7494C16.8853 15.007 16.856 15.1943 16.856 15.3113C16.856 15.604 16.9555 15.7503 17.1545 15.7503C17.2599 15.7503 17.3711 15.7328 17.4882 15.6976C17.6052 15.6625 17.7399 15.5806 17.892 15.4518C18.0442 15.323 18.2023 15.1182 18.3662 14.8372C18.53 14.5563 18.6764 14.2109 18.8051 13.8012C18.8403 13.6607 18.8695 13.5788 18.8929 13.5554C18.9164 13.532 19.0159 13.5202 19.1915 13.5202C19.4256 13.5202 19.5427 13.5788 19.5427 13.6958C19.5427 13.7895 19.49 13.9709 19.3846 14.2402C19.2793 14.5094 19.1329 14.808 18.9456 15.1357C18.7583 15.4635 18.4949 15.7562 18.1554 16.0137C17.816 16.2713 17.4531 16.4 17.0667 16.4C16.6921 16.4 16.3468 16.2771 16.0307 16.0313C15.7147 15.7854 15.5508 15.4108 15.5391 14.9075C15.5391 14.7084 15.5683 14.5211 15.6269 14.3455C15.6854 14.17 15.9371 13.5027 16.3819 12.3438C16.8268 11.1614 17.0843 10.4532 17.1545 10.219C17.2248 9.98491 17.2658 9.75663 17.2775 9.53421C17.2775 9.25326 17.178 9.11278 16.9789 9.11278H16.9438C16.5926 9.11278 16.2707 9.30594 15.978 9.69225C15.6854 10.0786 15.463 10.5702 15.3108 11.1673C15.2991 11.179 15.2874 11.1965 15.2757 11.2199C15.264 11.2433 15.2581 11.2609 15.2581 11.2726C15.2581 11.2843 15.2464 11.296 15.223 11.3077C15.1996 11.3194 15.182 11.3253 15.1703 11.3253C15.1586 11.3253 15.1352 11.3253 15.1001 11.3253C15.0649 11.3253 15.0181 11.3253 14.9596 11.3253H14.7138C14.6435 11.2551 14.6084 11.2024 14.6084 11.1673Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path><path d="M20.6709 11.1673C20.6826 11.097 20.7002 11.0034 20.7236 10.8863C20.747 10.7692 20.8172 10.5468 20.9343 10.219C21.0514 9.89126 21.1684 9.61616 21.2855 9.39373C21.4025 9.17131 21.5957 8.95474 21.865 8.74403C22.1342 8.53331 22.4034 8.43381 22.6727 8.44551C23.0941 8.44551 23.4453 8.55087 23.7263 8.76159C24.0072 8.9723 24.1828 9.17131 24.2531 9.35861C24.3233 9.54592 24.3584 9.66883 24.3584 9.72737C24.3584 9.75078 24.3643 9.76249 24.376 9.76249L24.5691 9.56933C25.2832 8.82012 26.0968 8.44551 27.0099 8.44551C27.6421 8.44551 28.1513 8.60355 28.5376 8.91962C28.9239 9.2357 29.1229 9.6981 29.1346 10.3068C29.1463 10.9156 28.9239 11.8345 28.4674 13.0637C28.0108 14.2929 27.7884 15.0362 27.8001 15.2938C27.8001 15.5981 27.8996 15.7503 28.0986 15.7503C28.1689 15.7503 28.2215 15.7445 28.2567 15.7328C28.5961 15.6742 28.9005 15.4518 29.1698 15.0655C29.439 14.6792 29.6439 14.2109 29.7843 13.6607C29.8078 13.5671 29.9248 13.5202 30.1355 13.5202C30.3697 13.5202 30.4867 13.5671 30.4867 13.6607C30.4867 13.6724 30.4633 13.7602 30.4165 13.9241C30.3228 14.2636 30.1941 14.5972 30.0302 14.925C29.8663 15.2528 29.597 15.5806 29.2224 15.9084C28.8478 16.2361 28.444 16.3942 28.0108 16.3825C27.4606 16.3825 27.0626 16.2244 26.8168 15.9084C26.5709 15.5923 26.448 15.2645 26.448 14.925C26.448 14.7026 26.6587 14.0002 27.0802 12.8179C27.5016 11.6355 27.7182 10.7458 27.7299 10.1488C27.7299 9.45812 27.4723 9.11278 26.9572 9.11278H26.8694C25.8627 9.11278 25.014 9.70395 24.3233 10.8863L24.2004 11.097L23.6209 13.45C23.2346 14.9835 23.0122 15.8089 22.9536 15.9259C22.8015 16.242 22.5498 16.4 22.1986 16.4C22.0464 16.4 21.9235 16.3649 21.8298 16.2947C21.7362 16.2244 21.6718 16.1542 21.6367 16.084C21.6016 16.0137 21.5899 15.9552 21.6016 15.9084C21.6016 15.7562 21.824 14.8021 22.2688 13.0461C22.7137 11.2902 22.9478 10.3361 22.9712 10.1839C22.9829 10.1254 22.9888 9.99076 22.9888 9.78005C22.9888 9.3235 22.8483 9.09522 22.5673 9.09522C22.1225 9.09522 21.7537 9.68054 21.4611 10.8512C21.3908 11.0853 21.3557 11.2082 21.3557 11.2199C21.3323 11.2902 21.2211 11.3253 21.0221 11.3253H20.7763C20.706 11.2551 20.6709 11.2024 20.6709 11.1673Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path></svg></button><button name="cosine" style="grid-area:cosine" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR"><svg width="37" height="24" viewBox="0 0 37 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.15137 13.2951C7.15137 12.0127 7.65728 10.8596 8.66912 9.83605C9.68095 8.81245 10.7751 8.30065 11.9517 8.30065C12.6106 8.30065 13.1282 8.44184 13.5047 8.72421C13.8812 9.00658 14.0754 9.37719 14.0871 9.83605C14.0871 10.1772 13.9754 10.4655 13.7518 10.7008C13.5283 10.9361 13.2459 11.0597 12.9047 11.0714C12.6812 11.0714 12.5047 11.0126 12.3753 10.8949C12.2458 10.7773 12.1811 10.6008 12.1811 10.3655C12.1811 10.1302 12.2458 9.93017 12.3753 9.76546C12.5047 9.60074 12.6341 9.4772 12.7635 9.39484C12.8929 9.31248 12.9753 9.27719 13.0106 9.28895H13.0282C13.0282 9.26542 12.9929 9.23013 12.9223 9.18306C12.8518 9.136 12.7282 9.08894 12.5517 9.04188C12.3753 8.99482 12.1752 8.97128 11.9517 8.97128C11.5987 8.97128 11.2634 9.05364 10.9457 9.21836C10.6987 9.32425 10.4457 9.50662 10.1869 9.76546C9.66919 10.2831 9.29269 11.0126 9.05738 11.9538C8.82207 12.8951 8.69853 13.5775 8.68677 14.001C8.68677 14.5423 8.83972 14.9482 9.14562 15.2188C9.40446 15.5011 9.74566 15.6423 10.1692 15.6423H10.2398C11.5575 15.6423 12.6459 15.1423 13.5047 14.1422C13.6106 14.0246 13.6812 13.9657 13.7165 13.9657C13.7636 13.9657 13.8401 14.0187 13.9459 14.1246C14.0518 14.2305 14.1107 14.3128 14.1224 14.3717C14.1342 14.4305 14.0812 14.5187 13.9636 14.6364C13.8459 14.754 13.6753 14.9187 13.4518 15.1305C13.2283 15.3423 12.9635 15.5188 12.6576 15.66C12.3517 15.8012 11.9752 15.9482 11.5281 16.1012C11.081 16.2541 10.6104 16.3188 10.1163 16.2953C9.23386 16.2953 8.52205 16.0129 7.98084 15.4482C7.43962 14.8835 7.16313 14.1658 7.15137 13.2951Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path><path d="M17.7393 16.2953C16.8568 16.2953 16.145 16.0071 15.6038 15.4306C15.0626 14.854 14.792 14.1599 14.792 13.3481C14.792 12.5833 14.9685 11.8597 15.3214 11.1773C15.6744 10.4949 16.1568 9.90077 16.7686 9.39485C17.6628 8.67715 18.5746 8.3183 19.5041 8.3183C19.8806 8.3183 20.1159 8.32419 20.21 8.33595C20.363 8.37125 20.5159 8.41243 20.6689 8.45949C20.8218 8.50655 21.0277 8.60068 21.2866 8.74186C21.5454 8.88305 21.7572 9.05953 21.9219 9.27131C22.0866 9.48309 22.2396 9.77134 22.3807 10.1361C22.5219 10.5008 22.5925 10.9126 22.5925 11.3715C22.5925 12.6304 22.0866 13.7657 21.0748 14.7776C20.0629 15.7894 18.9511 16.2953 17.7393 16.2953ZM16.3274 13.9834C16.3274 14.5717 16.4803 14.9952 16.7862 15.2541C17.0921 15.5129 17.4392 15.6423 17.8275 15.6423C18.3452 15.6423 18.8334 15.4541 19.2923 15.0776C19.7512 14.7011 20.1159 14.2069 20.3865 13.5951C20.4924 13.3481 20.6277 12.9127 20.7924 12.2892C20.9571 11.6656 21.0395 11.1244 21.0395 10.6655C21.0395 10.1478 20.9336 9.7537 20.7218 9.48309C20.4394 9.13012 20.0629 8.95364 19.5923 8.95364C18.8511 8.95364 18.1981 9.29484 17.6334 9.97724C17.198 10.4949 16.8745 11.1832 16.6627 12.0421C16.4509 12.901 16.3392 13.5481 16.3274 13.9834Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path><path d="M25.0631 11.0008C25.0631 10.6244 25.1572 10.242 25.3455 9.85371C25.5337 9.46545 25.8631 9.1066 26.3338 8.77717C26.8044 8.44774 27.375 8.2889 28.0456 8.30067C28.7751 8.30067 29.3046 8.4595 29.634 8.77717C29.9634 9.09484 30.134 9.4478 30.1458 9.83606C30.1458 10.2126 30.0458 10.4891 29.8458 10.6655C29.6458 10.842 29.4222 10.9361 29.1751 10.9479C29.0222 10.9479 28.881 10.9008 28.7516 10.8067C28.6222 10.7126 28.5516 10.5596 28.5398 10.3479C28.5398 10.1596 28.5927 9.9949 28.6986 9.85371C28.8045 9.71253 28.9045 9.60664 28.9986 9.53604C29.0928 9.46545 29.1692 9.43015 29.2281 9.43015C29.2398 9.43015 29.2457 9.42427 29.2457 9.41251C29.2457 9.37721 29.2045 9.32427 29.1222 9.25367C29.0398 9.18308 28.8928 9.11837 28.681 9.05954C28.4692 9.00071 28.2398 8.96542 27.9927 8.95365C27.428 8.95365 27.0162 9.1066 26.7573 9.41251C26.4985 9.71841 26.3632 10.0302 26.3514 10.3479C26.3514 10.642 26.4632 10.8479 26.6867 10.9656C26.9103 11.0832 27.2338 11.1832 27.6574 11.2656C28.0809 11.3479 28.3868 11.4362 28.5751 11.5303C29.3516 11.8715 29.7399 12.4362 29.7399 13.2245C29.7399 13.554 29.6752 13.8834 29.5457 14.2128C29.4163 14.5423 29.2222 14.8717 28.9634 15.2011C28.7045 15.5306 28.3339 15.7894 27.8515 15.9777C27.3691 16.1659 26.8161 16.2659 26.1926 16.2777C25.2866 16.2777 24.6454 16.1071 24.2689 15.7659C23.8924 15.4247 23.6983 15.0247 23.6865 14.5658C23.6865 14.1069 23.8101 13.7775 24.0571 13.5775C24.3042 13.3775 24.5631 13.2775 24.8337 13.2775C25.0101 13.2775 25.1749 13.3304 25.3278 13.4363C25.4808 13.5422 25.5631 13.7246 25.5749 13.9834C25.5749 14.2893 25.469 14.5482 25.2572 14.7599C25.0454 14.9717 24.8631 15.0776 24.7101 15.0776C24.6866 15.0894 24.6689 15.0952 24.6572 15.0952C24.6454 15.0952 24.6395 15.107 24.6395 15.1305C24.6513 15.1658 24.6984 15.2129 24.7807 15.2717C24.8631 15.3306 25.0454 15.407 25.3278 15.5012C25.6102 15.5953 25.9337 15.6365 26.2985 15.6247C26.722 15.6247 27.0868 15.56 27.3927 15.4306C27.6986 15.3011 27.9221 15.1364 28.0633 14.9364C28.2045 14.7364 28.3045 14.554 28.3633 14.3893C28.4221 14.2246 28.4516 14.0775 28.4516 13.9481C28.4516 13.6187 28.328 13.3716 28.0809 13.2069C27.8339 13.0422 27.5515 12.9422 27.2338 12.9069C26.9162 12.8716 26.5691 12.7833 26.1926 12.6421C25.8161 12.501 25.5396 12.2951 25.3631 12.0244C25.1631 11.7303 25.0631 11.3891 25.0631 11.0008Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path></svg></button><button name="tangent" style="grid-area:tangent" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR"><svg width="37" height="24" viewBox="0 0 37 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.14398 9.31831C6.06036 9.23469 6.01855 9.17496 6.01855 9.13913C6.01855 9.09134 6.03647 8.99578 6.07231 8.85243C6.10815 8.70908 6.13801 8.62546 6.1619 8.60157C6.18579 8.54184 6.23955 8.51198 6.32317 8.51198C6.40679 8.51198 6.71141 8.506 7.23702 8.49406H8.1867L8.52715 7.06057C8.56299 6.92917 8.6048 6.75596 8.65258 6.54094C8.70037 6.32591 8.74218 6.17062 8.77801 6.07505C8.81385 5.97949 8.84969 5.86003 8.88552 5.71668C8.92136 5.57333 8.96914 5.4718 9.02887 5.41207C9.0886 5.35234 9.14833 5.28066 9.20806 5.19704C9.26779 5.11342 9.35141 5.05967 9.45892 5.03578C9.56643 5.01188 9.67394 4.99994 9.78145 4.99994C9.99648 5.01188 10.1458 5.07759 10.2294 5.19704C10.313 5.3165 10.3548 5.42999 10.3548 5.5375C10.3548 5.62112 10.3011 5.90184 10.1936 6.37967C10.0861 6.8575 9.96661 7.32935 9.83521 7.79523L9.65602 8.45822C9.65602 8.48211 9.95467 8.49406 10.552 8.49406H11.4658C11.5494 8.57768 11.5912 8.64338 11.5912 8.69116C11.5912 8.95397 11.5136 9.16302 11.3583 9.31831H9.441L8.79593 11.9165C8.33005 13.8278 8.09711 14.8551 8.09711 14.9985C8.09711 15.5002 8.25837 15.7511 8.58091 15.7511C8.99901 15.7511 9.40516 15.548 9.79937 15.1418C10.1936 14.7357 10.5101 14.234 10.7491 13.6367C10.7729 13.565 10.8028 13.5232 10.8386 13.5113C10.8745 13.4993 10.9641 13.4874 11.1074 13.4754H11.1791C11.3583 13.4754 11.4479 13.5232 11.4479 13.6188C11.4479 13.6546 11.43 13.7263 11.3941 13.8338C11.3344 14.0249 11.2269 14.2519 11.0716 14.5147C10.9163 14.7775 10.7132 15.0582 10.4624 15.3569C10.2115 15.6555 9.90688 15.9064 9.54851 16.1094C9.19014 16.3125 8.8258 16.4141 8.45548 16.4141C8.09711 16.4141 7.75666 16.3245 7.43412 16.1453C7.11159 15.9661 6.87865 15.6555 6.7353 15.2135C6.71141 15.118 6.69946 14.9567 6.69946 14.7297V14.4072L7.32661 11.8986C7.74471 10.2142 7.95973 9.3661 7.97168 9.35415C7.97168 9.33026 7.66706 9.31831 7.05783 9.31831H6.14398Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path><path d="M12.7373 13.4037C12.7373 12.1972 13.1912 11.0504 14.0991 9.96336C15.007 8.8763 16.0283 8.32679 17.1632 8.31485C17.7724 8.31485 18.31 8.60752 18.7759 9.19286C18.967 8.83449 19.2417 8.6553 19.6001 8.6553C19.7554 8.6553 19.8928 8.70308 20.0122 8.79865C20.1317 8.89421 20.1914 9.01367 20.1914 9.15702C20.1914 9.31231 19.9704 10.268 19.5284 12.024C19.0864 13.78 18.8595 14.7715 18.8475 14.9985C18.8475 15.2971 18.8893 15.4942 18.973 15.5898C19.0566 15.6853 19.182 15.7391 19.3493 15.751C19.4568 15.7391 19.5762 15.6853 19.7076 15.5898C19.9585 15.3509 20.2034 14.7775 20.4423 13.8696C20.514 13.6307 20.5737 13.5053 20.6215 13.4933C20.6454 13.4814 20.7051 13.4754 20.8007 13.4754H20.8723C21.0993 13.4754 21.2128 13.5291 21.2128 13.6367C21.2128 13.7083 21.1829 13.8696 21.1232 14.1205C21.0635 14.3713 20.944 14.6939 20.7648 15.0881C20.5856 15.4823 20.3945 15.7809 20.1914 15.984C20.0361 16.1393 19.845 16.2647 19.618 16.3603C19.5225 16.3842 19.3791 16.3961 19.188 16.3961C18.7818 16.3961 18.4414 16.3065 18.1666 16.1273C17.8919 15.9482 17.7127 15.763 17.6291 15.5719L17.5216 15.3031C17.5096 15.2911 17.4857 15.2971 17.4499 15.321C17.426 15.3449 17.4021 15.3688 17.3782 15.3927C16.6734 16.0616 15.9567 16.3961 15.228 16.3961C14.571 16.3961 13.9916 16.1572 13.4899 15.6794C12.9882 15.2015 12.7373 14.443 12.7373 13.4037ZM18.4354 10.3396C18.4354 10.268 18.4055 10.1366 18.3458 9.94544C18.2861 9.7543 18.1487 9.54526 17.9337 9.31829C17.7187 9.09132 17.4439 8.97186 17.1094 8.95992C16.6913 8.95992 16.2912 9.14507 15.9089 9.51539C15.5266 9.88571 15.228 10.3695 15.013 10.9668C14.6665 11.9105 14.4216 12.8901 14.2783 13.9054C14.2783 13.9413 14.2783 14.007 14.2783 14.1025C14.2783 14.1981 14.2723 14.2698 14.2604 14.3176C14.2604 14.8551 14.3679 15.2254 14.5829 15.4285C14.7979 15.6316 15.0548 15.7391 15.3534 15.751C15.8074 15.751 16.2553 15.5539 16.6973 15.1597C17.1393 14.7655 17.4021 14.4609 17.4857 14.2459C17.5096 14.1981 17.6709 13.559 17.9695 12.3286C18.2682 11.0982 18.4235 10.4352 18.4354 10.3396Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path><path d="M22.0029 11.0743C22.0149 11.0027 22.0328 10.9071 22.0567 10.7876C22.0806 10.6682 22.1523 10.4412 22.2717 10.1067C22.3912 9.77225 22.5106 9.49153 22.6301 9.26456C22.7495 9.03759 22.9466 8.81659 23.2214 8.60157C23.4961 8.38655 23.7709 8.28501 24.0456 8.29696C24.4757 8.29696 24.8341 8.40447 25.1208 8.61949C25.4075 8.83451 25.5866 9.03759 25.6583 9.22872C25.73 9.41985 25.7658 9.54528 25.7658 9.60501C25.7658 9.6289 25.7718 9.64085 25.7837 9.64085L25.9809 9.44374C26.7095 8.67922 27.5398 8.29696 28.4715 8.29696C29.1166 8.29696 29.6362 8.45822 30.0304 8.78076C30.4247 9.10329 30.6277 9.57515 30.6397 10.1963C30.6516 10.8175 30.4247 11.7552 29.9588 13.0095C29.4929 14.2638 29.2659 15.0224 29.2779 15.2852C29.2779 15.5958 29.3794 15.7511 29.5825 15.7511C29.6542 15.7511 29.7079 15.7451 29.7437 15.7332C30.0902 15.6734 30.4008 15.4465 30.6755 15.0523C30.9503 14.658 31.1593 14.1802 31.3027 13.6188C31.3266 13.5232 31.446 13.4754 31.661 13.4754C31.8999 13.4754 32.0194 13.5232 32.0194 13.6188C32.0194 13.6307 31.9955 13.7203 31.9477 13.8875C31.8522 14.234 31.7208 14.5744 31.5535 14.9089C31.3863 15.2434 31.1115 15.5779 30.7293 15.9123C30.347 16.2468 29.9349 16.4081 29.4929 16.3961C28.9314 16.3961 28.5253 16.2349 28.2744 15.9123C28.0236 15.5898 27.8981 15.2553 27.8981 14.9089C27.8981 14.6819 28.1132 13.9652 28.5432 12.7587C28.9732 11.5522 29.1942 10.6443 29.2062 10.0351C29.2062 9.33026 28.9434 8.97786 28.4178 8.97786H28.3282C27.3009 8.97786 26.4348 9.58112 25.73 10.7876L25.6046 11.0027L25.0132 13.4037C24.619 14.9686 24.3921 15.8108 24.3323 15.9303C24.177 16.2528 23.9202 16.4141 23.5618 16.4141C23.4066 16.4141 23.2811 16.3782 23.1856 16.3066C23.09 16.2349 23.0243 16.1632 22.9885 16.0915C22.9526 16.0199 22.9407 15.9601 22.9526 15.9123C22.9526 15.757 23.1796 14.7835 23.6335 12.9916C24.0875 11.1998 24.3264 10.2262 24.3503 10.0709C24.3622 10.0112 24.3682 9.87379 24.3682 9.65877C24.3682 9.19288 24.2248 8.95994 23.9381 8.95994C23.4842 8.95994 23.1079 9.55723 22.8093 10.7518C22.7376 10.9907 22.7018 11.1161 22.7018 11.1281C22.6779 11.1998 22.5644 11.2356 22.3613 11.2356H22.1104C22.0388 11.1639 22.0029 11.1102 22.0029 11.0743Z" fill="#3E424B" stroke="#3E424B" stroke-width="0.5"></path>
-        </svg>
-    </button>
-    <button name="frac" style="grid-area:frac" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">
-        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8.71875" y="14.6001" width="7" height="7" rx="1" stroke="#3E424B" stroke-width="1.7" stroke-linejoin="round"></rect>
-            <rect x="8.71875" y="2.29993" width="7" height="7" rx="1" stroke="#3E424B" stroke-width="1.7" stroke-linejoin="round"></rect>
-            <path d="M7.51562 12H16.9156" stroke="#3E424B" stroke-width="1.7" stroke-linecap="round"></path>
-        </svg>
-    </button>
-    <button name="letter-e" style="grid-area:letter-e" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">e</button>
-    <button name="letter-x" style="grid-area:letter-x" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">x</button>
-    <button name="letter-y" style="grid-area:letter-y" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">y</button>
-    <button name="letter-z" style="grid-area:letter-z" class="MathKeyboard_mathematics-keyboard-keypad__Kj3mR">z</button>
-</div>
+    <script src="solve-math.js">
+       
 
-        </div>
-        
-     </div>
-    <script src="solve-math.js"></script>
-    </body>
-    </html>
+        async function solve() {
+    let expression = display.value.trim();
+
+    try {
+        // Call Gemini API
+        let geminiResponse = await fetch('https://api.gemini.com/v2/solve', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE'
+            },
+            body: JSON.stringify({ query: expression })
+        });
+        let geminiResult = await geminiResponse.json();
+
+        // If Gemini API fails or expression is too complex, fall back to Wolfram
+        if (!geminiResult.success) {
+            let wolframResponse = await fetch(`https://api.wolframalpha.com/v2/query?input=${encodeURIComponent(expression)}&appid=LGAVWW-WXW7PW2AUP`);
+            let wolframResult = await wolframResponse.json();
+
+            if (wolframResult.queryresult.success) {
+                display.value += '\n' + wolframResult.queryresult.pods[0].subpods[0].plaintext;
+            } else {
+                display.value += '\nError: Unable to solve expression';
+            }
+        } else {
+            display.value += '\n' + geminiResult.result;
+        }
+    } catch (error) {
+        display.value += '\nError: Unable to solve expression';
+    }
+}
+
+
+    </script>
+</body>
+</html>
