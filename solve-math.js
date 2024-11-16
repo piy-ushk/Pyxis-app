@@ -8,7 +8,57 @@ function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.classList.toggle('show');
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.querySelector('.sidebar');
+    const chatContainer = document.querySelector('.chat-container');
+    
+    // Create and add pin button
+    const pinButton = document.createElement('button');
+    pinButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/></svg>';
+  
 
+    pinButton.className = 'pin-button';
+    sidebar.appendChild(pinButton);
+
+    // Create hover area
+    const hoverArea = document.createElement('div');
+    hoverArea.className = 'sidebar-hover-area';
+    document.body.appendChild(hoverArea);
+
+    let isPinned = false;
+    let isHovering = false;
+
+    pinButton.addEventListener('click', function() {
+        isPinned = !isPinned;
+        sidebar.classList.toggle('pinned', isPinned);
+        pinButton.classList.toggle('active', isPinned);
+        if (isPinned) {
+            sidebar.style.left = '0';
+        } else {
+            sidebar.style.left = isHovering ? '0' : '-280px';
+        }
+    });
+
+    // Handle sidebar hover
+    function showSidebar() {
+        if (!isPinned) {
+            isHovering = true;
+            sidebar.style.left = '0';
+        }
+    }
+
+    function hideSidebar() {
+        if (!isPinned) {
+            isHovering = false;
+            sidebar.style.left = '-280px';
+        }
+    }
+
+    hoverArea.addEventListener('mouseenter', showSidebar);
+    sidebar.addEventListener('mouseenter', showSidebar);
+
+    sidebar.addEventListener('mouseleave', hideSidebar);
+});
 function formatMathContent(text) {
    // Replace common math notations with LaTeX
    let formatted = text
@@ -224,3 +274,63 @@ async function solveWithGemini(question) {
        throw error;
    }
 }
+
+let display = document.getElementById('display');
+let cursorPosition = 0;
+
+function addToDisplay(value) {
+    let text = display.value;
+    let before = text.slice(0, display.selectionStart);
+    let after = text.slice(display.selectionStart);
+    display.value = before + value + after;
+    display.selectionStart = display.selectionEnd = before.length + value.length;
+    display.focus();
+}
+
+function clearDisplay() {
+    display.value = '';
+    display.focus();
+}
+
+function clearLastChar() {
+    let text = display.value;
+    let pos = display.selectionStart;
+    if (pos > 0) {
+        display.value = text.slice(0, pos - 1) + text.slice(pos);
+        display.selectionStart = display.selectionEnd = pos - 1;
+    }
+    display.focus();
+}
+
+function deleteChar() {
+    let text = display.value;
+    let pos = display.selectionStart;
+    display.value = text.slice(0, pos) + text.slice(pos + 1);
+    display.selectionStart = display.selectionEnd = pos;
+    display.focus();
+}
+
+function moveLeft() {
+    let pos = display.selectionStart;
+    if (pos > 0) {
+        display.selectionStart = display.selectionEnd = pos - 1;
+    }
+    display.focus();
+}
+
+function moveRight() {
+    let pos = display.selectionStart;
+    if (pos < display.value.length) {
+        display.selectionStart = display.selectionEnd = pos + 1;
+    }
+    display.focus();
+}
+
+
+        // Handle keyboard input
+        display.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                solve();
+            }
+        });
