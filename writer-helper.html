@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Writer Helper</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.12.0/math.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --text-light: #e2e8f0;
+            --secondary-dark: #1e293b;
+            --border-color: #334155;
+            --hover-color: rgba(255, 255, 255, 0.1);
+        }
+ 
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: var(--hover-color);
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-[#e2e8f0] p-8 min-h-screen">
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar">
+        <div class="p-4">
+            <h1 class="text-xl font-bold text-blue-500">PIXIO.ai for Academics</h1>
+        </div>
+        <nav>
+            <a href="example.html" class="nav-item active">
+                <i data-lucide="home" class="w-5 h-5 mr-3"></i>
+                Home
+            </a>
+            <a href="Pyxis.html" class="nav-item">
+                <i data-lucide="bot" class="w-5 h-5 mr-3"></i>
+                Pixio AI
+            </a>
+            <a href="calculator.html" class="nav-item">
+                <i data-lucide="calculator" class="w-5 h-5 mr-3"></i>
+                Calculator
+            </a>
+            <a href="writer-helper.html" class="nav-item">
+                <i data-lucide="pen-tool" class="w-5 h-5 mr-3"></i>
+                Writer Helper
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="book-open" class="w-5 h-5 mr-3"></i>
+                Study Tools
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
+                Settings
+            </a>
+        </nav>
+    </div>
+
+    <div class="max-w-3xl mx-auto bg-[#1e293b] p-8 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold text-center mb-8">Professional Writer Helper</h1>
+
+        <div class="mb-6">
+            <label for="contentType" class="block font-medium mb-2">Content Type</label>
+            <select id="contentType" class="w-full px-4 py-4 bg-[#0f172a] border border-[#334155] rounded-3xl focus:outline-none focus:border-[#2563eb] appearance-none">
+                <option value="essay">Essay</option>
+                <option value="paragraph">Paragraph</option>
+                <option value="story">Story</option>
+                <option value="article">Article</option>
+                <option value="blog">Blog Post</option>
+            </select>
+        </div>
+
+        <div class="mb-6">
+            <label for="language" class="block font-medium mb-2">Language</label>
+            <select id="language" class="w-full px-4 py-4 bg-[#0f172a] border border-[#334155] rounded-3xl focus:outline-none focus:border-[#2563eb] appearance-none">
+                <option value="english">English</option>
+                <option value="hindi">हिंदी</option>
+                <option value="kannada">ಕನ್ನಡ</option>
+            </select>
+        </div>
+
+        <div class="mb-6">
+            <label for="prompt" class="block font-medium mb-2">Your Topic/Prompt</label>
+            <textarea id="prompt" placeholder="Enter your topic or prompt here..." class="w-full px-4 py-4 bg-[#0f172a] border border-[#334155] rounded-3xl focus:outline-none focus:border-[#2563eb] min-h-[120px] resize-y"></textarea>
+        </div>
+
+        <button id="generateBtn" onclick="generateContent()" class="w-full px-4 py-4 bg-[#2563eb] hover:bg-[#1d4ed8] text-white rounded-3xl transition-colors mb-4">Generate Content</button>
+        <div id="output" class="output hidden mt-6 p-6 bg-[#0f172a] border border-[#334155] rounded-xl min-h-[150px] whitespace-pre-wrap"></div>
+        <button id="copyBtn" onclick="copyText()" class="copy-btn hidden w-full mt-4 px-4 py-4 bg-[#1e293b] hover:bg-[#334155] text-white rounded-3xl transition-colors">Copy Text</button>
+    </div>
+    <script src="solve-math.js"></script>
+    <script>
+        const generateBtn = document.getElementById('generateBtn');
+        const promptInput = document.getElementById('prompt');
+        const outputDiv = document.getElementById('output');
+        const copyBtn = document.getElementById('copyBtn');
+        const contentTypeSelect = document.getElementById('contentType');
+        const languageSelect = document.getElementById('language');
+
+        const API_KEY = "AIzaSyBMeFzDkp-Wh4IOuFJbFjUT1RwjiH4Ee5E";
+
+        function formatContent(content) {
+            content = content.replace(/\*(.*?)\*/g, '$1');
+            const lines = content.split('\n');
+            const formattedLines = lines.map(line => {
+                if (/^[A-Z].*:$/.test(line.trim()) && line.startsWith('#')) {
+                    return `## ${line}`;
+                }
+                return line;
+            });
+            
+            const formattedContent = formattedLines.map(line => {
+                if (line.trim().startsWith('- ') && !line.trim().startsWith('* ')) {
+                    return line.replace('-', '•');
+                }
+                return line;
+            }).join('\n');
+
+            return formattedContent.replace(/\n\n/g, '\n<br>\n');
+        }
+
+        async function generateContent() {
+            const prompt = promptInput.value.trim();
+            if (!prompt) {
+                alert('Please enter a prompt first!');
+                return;
+            }
+
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<div class="flex items-center justify-center gap-2"><div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>Generating...</div>';
+            outputDiv.classList.remove('hidden');
+            copyBtn.classList.add('hidden');
+            outputDiv.innerHTML = 'Generating content...';
+
+            const contentType = contentTypeSelect.value;
+            const language = languageSelect.value;
+
+            try {
+                let generatedContent = await generateWithGemini(prompt, contentType, language);
+                generatedContent = formatContent(generatedContent);
+                const formattedHtml = marked.parse(generatedContent);
+                outputDiv.innerHTML = formattedHtml;
+                copyBtn.classList.remove('hidden');
+            } catch (error) {
+                outputDiv.innerHTML = `<div class="text-red-500 text-sm mt-1 p-2 bg-red-500/10 border border-red-500/20 rounded-xl">${error.message}</div>`;
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = 'Generate Content';
+            }
+        }
+
+        async function generateWithGemini(prompt, type, language) {
+            const API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent';
+
+            const promptTemplate = {
+                english: `Write a professional ${type} about "${prompt}". Use appropriate headers, bullet points, and formatting. Organize the content with clear sections and proper structure.`,
+                hindi: `"${prompt}" पर एक व्यावसायिक ${type} लिखें। उचित शीर्षक, बुलेट पॉइंट और प्रारूपण का उपयोग करें। सामग्री को स्पष्ट अनुभागों और उचित संरचना के साथ व्यवस्थित करें।`,
+                kannada: `"${prompt}" ಕುರಿತು ವೃತ್ತಿಪರ ${type} ಬರೆಯಿರಿ. ಸೂಕ್ತ ಶೀರ್ಷಿಕೆಗಳು, ಬುಲೆಟ್ ಪಾಯಿಂಟ್‌ಗಳು ಮತ್ತು ಫಾರ್ಮ್ಯಾಟಿಂಗ್ ಅನ್ನು ಬಳಸಿ. ವಿಷಯವನ್ನು ಸ್ಪಷ್ಟ ವಿಭಾಗಗಳು ಮತ್ತು ಸರಿಯಾದ ರಚನೆಯೊಂದಿಗೆ ವ್ಯವಸ್ಥೆಗೊಳಿಸಿ.`
+            };
+
+            const requestBody = {
+                contents: [{
+                    parts: [{
+                        text: promptTemplate[language]
+                    }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 1024,
+                }
+            };
+
+            try {
+                const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('Invalid response format from API');
+                }
+
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error('API Error:', error);
+                throw new Error('Failed to generate content. Please try again.');
+            }
+        }
+
+        function copyText() {
+            const textToCopy = outputDiv.innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = 'Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text:', err);
+                alert('Failed to copy text. Please try selecting and copying manually.');
+            });
+        }
+
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('show');
+        }
+
+        promptInput.addEventListener('input', function() {
+            generateBtn.disabled = !this.value.trim();
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
