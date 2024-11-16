@@ -21,11 +21,33 @@ body {
     background-color: var(--primary-dark);
     color: var(--text-primary);
 }
+/* Logo container styling */
 
+  
+.logo-container {
+    max-width: 5vh;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+  }
+  
+  .logo-pixio, .logo-pyxis {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .logo-pixio svg {
+    margin-right: 4px;
+  }
+  
+  .logo-pyxis svg {
+    display: block;
+  }
 /* Main container for flex layout */
 .main-container {
     display: flex;
-    flex-direction: row;
+    
     height: 100vh;
     position: relative;
 }
@@ -34,15 +56,16 @@ body {
 .sidebar {
     max-width: 280px;
     width: 280px;
-    height: 100vh;
+    margin-bottom: 2%;
+    height: 98vh;
     overflow-y: auto;
     max-height: 100vh;
     position: fixed;
     top: 0;
     left: -280px; 
-    mask: linear-gradient(black, black, transparent);
+    mask: linear(black, black, transparent);
     backdrop-filter: blur(10px);
-   
+    border-radius: 2%;
     border-right: 1px solid var(--border-color);
     padding: 16px;
     display: flex;
@@ -101,13 +124,13 @@ body {
 }
 
 .sidebar-items li {
-    margin-left: 10px;
+    margin-left: 5px;
     margin-bottom: 10px;
 }
 
-.sidebar-items a {
+.sidebar-items a, .chat-lists {
     display: block;
-    padding: 10px 15px;
+    padding: 10px 10px;
     color: var(--text-secondary);
     text-decoration: none;
     border-radius: 8px;
@@ -127,15 +150,16 @@ body {
 }
 }
  .sidebar-items{
-    max-width: 60vh;
-    width: 55vh;
-    height: 100vh;
+    max-width: 280px;
+    width: 280px;
+    max-height: 40vh;
+    height: 40vh;
     margin-top: 20px;
     overflow-y: auto;
     max-height: 100vh;
     background-color: var(--secondary-dark);
     border-right: 1px solid var(--border-color);
-    padding: 16px;
+    padding: 4px;
     display: flex;
     flex-direction: column;
     z-index: 10; /* Ensure sidebar overlays chat messages */
@@ -146,6 +170,8 @@ body {
 #prompts {
     margin-top: 16px;
     color: rgb(255, 255, 255);
+    
+
     padding: 10px;
     margin: 5px 5px;
     background: rgb(47, 48, 48);
@@ -177,14 +203,63 @@ body {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
-.chat-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow-y: auto;
+/* Style for the select dropdown */
+/* #chat-list {
+    width: 250px;
+    padding: 10px;
+    mask: linear(black, black, transparent);
+    backdrop-filter: blur(10px);
+    border: 2px solid #000000;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    appearance: none;  
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+ 
+#chat-list:hover {
+    background-color: var(--hover-color);
+    color: var(--text-primary);
+}
+ 
+#chat-list:focus {
+    outline: none;
+    border-color: #000000;
+    box-shadow: 0px 4px 10px #4a90e2;
+}
+ 
+#chat-list option {
+    font-size: 1rem;
+    color: #ffffff;
+    padding: 10px;
+    mask: linear(black, black, transparent);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+ 
+#chat-list option:hover {
+    
+    mask: linear(black, black, transparent);
+    backdrop-filter: blur(10px);
 }
 
-/* Updated chat-item for better appearance */
+ 
+#chat-list option:checked {
+    background-color: var(--hover-color);
+    color: var(--text-primary);
+    mask: linear(black, black, transparent);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+ 
 .chat-item {
     display: flex;
     align-items: center;
@@ -199,7 +274,58 @@ body {
 .chat-item:hover, .chat-item.active {
     background-color: var(--hover-color);
     color: var(--text-primary);
+} */
+
+.chat-history-container {
+    margin: 20px;
 }
+
+#chat-history-select {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Blue background */
+    color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#chat-history-select option {
+    background-color: #f9f9f9; /* Light background for dropdown */
+    color: #333; /* Text color for dropdown items */
+}
+
+#chat-history-select option:hover {
+    background-color: #d6e9ff; /* Lighter blue hover */
+}
+
+#new-chat-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green for new chat */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#new-chat-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+#chat-display {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    min-height: 150px;
+}
+
+.hidden {
+    display: none;
+}
+
 
 .chat-container {
     flex-grow: 1;
@@ -320,6 +446,15 @@ body {
     }
 }
 
+#chat-section {
+    flex: 1;
+    padding: 20px;
+}
+
+#messages {
+    margin-bottom: 20px;
+}
+ 
 /* User message style */
 .user-message {
     background-color: var(--secondary-dark);
