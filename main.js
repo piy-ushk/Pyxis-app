@@ -12,8 +12,8 @@
   }
   
 // Constants
-const API_KEY = 'AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+const API_KEY = 'AIzaSyBMeFzDkp-Wh4IOuFJbFjUT1RwjiH4Ee5E';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // DOM Elements
 const chatMessages = document.getElementById('chat-messages');
@@ -42,7 +42,7 @@ function usePrompt(promptText) {
 
 // State management
 let currentChatId = generateChatId();
-let chatHistory = new Map();
+// let chatHistory = new Map();
 let isProcessing = false;
 
 // Initialize speech recognition
@@ -56,7 +56,7 @@ function createEnhancedPrompt(message, context = []) {
     return {
         contents: [{
             parts: [{
-                text: `You are Pyxis AI, a helpful and knowledgeable assistant. Please provide a clear, structured response using:
+                text: `You are Pixio AI created by Piyush, a helpful and knowledgeable assistant. Please provide a clear, structured response using:
                 - Headings with colons
                 - Bullet points using • symbol
                 - Numbered lists where appropriate
@@ -131,15 +131,15 @@ function usePrompt(value) {
     userInput.value = value;
 }
  // Ensure only 5 chats are displayed, show the rest as hidden
-function limitChatHistory() {
-    const chatItems = document.querySelectorAll('.chat-item');
-    chatItems.forEach((item, index) => {
-        if (index >= 5) {
-            item.style.display = 'none'; // Hide chats after the 5th one
-        }
-    });
-}
-limitChatHistory();
+// function limitChatHistory() {
+//     const chatItems = document.querySelectorAll('.chat-item');
+//     chatItems.forEach((item, index) => {
+//         if (index >= 5) {
+//             item.style.display = 'none'; // Hide chats after the 5th one
+//         }
+//     });
+// }
+// limitChatHistory();
 
 // API interaction with retry mechanism
 async function fetchAIResponse(prompt, retries = 3) {
@@ -183,11 +183,44 @@ function addMessage(text, type) {
     
     const content = document.createElement('div');
     content.className = 'message-content';
+
     
     // Format AI responses
+    function cleanMarkdownFormatting(text) {
+        // Remove bold/italic asterisks
+        text = text.replace(/\*{1,3}/g, '');
+        
+        // Remove underscores used for emphasis
+        text = text.replace(/_{1,3}/g, '');
+        
+        // Remove hashtags from headers
+        text = text.replace(/^#{1,6}\s*/gm, '');
+        
+        // Remove backticks for code
+        text = text.replace(/`/g, '');
+        
+        // Remove blockquotes
+        text = text.replace(/^\s*>\s*/gm, '');
+        
+        // Remove horizontal rules
+        text = text.replace(/^\s*[-*_]{3,}\s*$/gm, '');
+        
+        // Remove inline code blocks
+        text = text.replace(/`{1,3}[^`]*`{1,3}/g, '');
+        
+        // Remove list markers
+        text = text.replace(/^\s*[-*+]\s+/gm, '');
+        text = text.replace(/^\s*\d+\.\s+/gm, '');
+        
+        
+        
+        return text;
+    }
+    
+    // Example usage:
     if (type === 'ai') {
-        // Remove any asterisks from the text
-        text = text.replace(/\*/g, '');
+        text = cleanMarkdownFormatting(text);
+    
         
         // Split response into sections
         const sections = text.split('\n\n');
@@ -295,20 +328,20 @@ async function sendMessage() {
         // Process and clean the response
         const processedResponse = aiResponse
             .trim()
-            .replace(/^As Pyxis AI,?/i, '')
+            .replace(/^As Pixio AI,?/i, '')
             .replace(/^I would respond:?/i, '')
             .trim();
 
         loadingDiv.remove();
         addMessage(processedResponse, 'ai');
 
-        // Save to chat history
-        saveChat(currentChatId, Array.from(chatMessages.children).map(msg => ({
-            type: msg.classList.contains('user-message') ? 'user' : 'ai',
-            content: msg.querySelector('.message-content').textContent
-        })));
+        // // Save to chat history
+        // saveChat(currentChatId, Array.from(chatMessages.children).map(msg => ({
+        //     type: msg.classList.contains('user-message') ? 'user' : 'ai',
+        //     content: msg.querySelector('.message-content').textContent
+        // })));
 
-        updateChatList();
+        // updateChatList();
     } catch (error) {
         console.error('Error:', error);
         loadingDiv.remove();
@@ -318,7 +351,145 @@ async function sendMessage() {
     }
 }
 
-// Utility functions
+// AI Response System
+const aiResponses = {
+    // Core system responses
+    responses: {
+        greeting: [
+            "Hi there! I'm here to help.",
+            "Hello! How can I assist you?",
+            "Greetings! Ready to help you.",
+            "Hi! Looking forward to helping you."
+        ],
+        
+        creator: [
+            "I was created by Piyush.",
+            "Piyush is my creator.",
+            "I'm an AI assistant developed by Piyush."
+        ],
+        
+        identity: [
+            "I'm an AI assistant designed to help with various tasks.",
+            "I'm your AI helper, created to assist with different challenges.",
+            "I'm an AI created to help you with tasks and questions."
+        ],
+        
+        capabilities: [
+            "I can help with coding, writing, analysis, and problem-solving.",
+            "I'm capable of assisting with programming, writing, and various analytical tasks.",
+            "My capabilities include helping with code, text analysis, and general problem-solving."
+        ],
+        
+        limitations: [
+            "While I'm quite capable, I can't access external websites or real-time data.",
+            "I can't access the internet or process real-time information.",
+            "I work with the information provided in our conversation."
+        ]
+    },
+
+    // Pattern matching for questions
+    patterns: {
+        creator: [
+            /who (created|made|built) you/i,
+            /who is your (creator|maker|developer)/i,
+            /who('s| is) responsible for (creating|making|developing) you/i
+        ],
+        identity: [
+            /what are you/i,
+            /who are you/i,
+            /tell me about yourself/i,
+            /what kind of (ai|assistant) are you/i
+        ],
+        capabilities: [
+            /what can you do/i,
+            /what are your capabilities/i,
+            /how can you help/i,
+            /what are you capable of/i
+        ],
+        limitations: [
+            /what can't you do/i,
+            /what are your limitations/i,
+            /is there anything you can't do/i
+        ]
+    },
+
+    // Get random response from category
+    getRandomResponse(category) {
+        const responses = this.responses[category];
+        return responses[Math.floor(Math.random() * responses.length)];
+    },
+
+    // Add friendly touch to response
+    addFriendlyTouch() {
+        const friendly = [
+            "Thanks for asking! ",
+            "I appreciate your question. ",
+            "Great question! ",
+            "I'm glad you asked. ",
+            ""  // Empty string for occasional direct responses
+        ];
+        return friendly[Math.floor(Math.random() * friendly.length)];
+    },
+
+    // Process user input and return appropriate response
+    processInput(userInput) {
+        // Clean the input
+        userInput = userInput.toLowerCase().trim();
+
+        // Check for greetings
+        if (/^(hi|hello|hey|greetings)/i.test(userInput)) {
+            return this.getRandomResponse('greeting');
+        }
+
+        // Check each pattern category
+        for (const [category, patternList] of Object.entries(this.patterns)) {
+            for (const pattern of patternList) {
+                if (pattern.test(userInput)) {
+                    return this.addFriendlyTouch() + this.getRandomResponse(category);
+                }
+            }
+        }
+
+        // Default response if no pattern matches
+        return "I understand your question. Could you please rephrase it so I can provide a better response?";
+    },
+
+    // Add custom response
+    addCustomResponse(category, patterns, responses) {
+        if (!this.patterns[category]) {
+            this.patterns[category] = [];
+            this.responses[category] = [];
+        }
+        
+        this.patterns[category] = this.patterns[category].concat(patterns);
+        this.responses[category] = this.responses[category].concat(responses);
+    }
+};
+
+// Example usage:
+console.log(aiResponses.processInput("Who created you?"));
+console.log(aiResponses.processInput("What can you do?"));
+console.log(aiResponses.processInput("Hello"));
+
+// Example of adding custom responses
+aiResponses.addCustomResponse(
+    'mood',
+    [/how are you/i, /how do you feel/i],
+    [
+        "I'm functioning well and ready to help!",
+        "I'm operational and eager to assist you.",
+        "I'm doing great, thanks for asking! How can I help?"
+    ]
+);
+
+// Function to handle user input
+function handleUserMessage(message) {
+    return aiResponses.processInput(message);
+}
+
+ 
+
+ 
 function generateChatId() {
     return `chat_${Date.now()}`;
 }
@@ -327,49 +498,86 @@ function scrollToBottom() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function saveChat(chatId, messages) {
-    chatHistory.set(chatId, messages);
-    try {
-        localStorage.setItem('chatHistory', JSON.stringify([...chatHistory]));
-    } catch (e) {
-        console.error('Error saving chat history:', e);
-    }
-}
+// function saveChat(chatId, messages) {
+//     chatHistory.set(chatId, messages);
+//     try {
+//         localStorage.setItem('chatHistory', JSON.stringify([...chatHistory]));
+//     } catch (e) {
+//         console.error('Error saving chat history:', e);
+//     }
+// }
 
-function loadChatHistory() {
-    try {
-        const saved = localStorage.getItem('chatHistory');
-        if (saved) {
-            chatHistory = new Map(JSON.parse(saved));
-            updateChatList();
-        }
-    } catch (error) {
-        console.error('Error loading chat history:', error);
-        chatHistory = new Map();
-    }
-}
+// function loadChatHistory() {
+//     try {
+//         const saved = localStorage.getItem('chatHistory');
+//         if (saved) {
+//             chatHistory = new Map(JSON.parse(saved));
+//             updateChatList();
+//         }
+//     } catch (error) {
+//         console.error('Error loading chat history:', error);
+//         chatHistory = new Map();
+//     }
+// }
 
-function updateChatList() {
-    const chatList = document.querySelector('.chat-list');
-    if (!chatList) return;
+// function updateChatList() {
+//     const chatList = document.querySelector('.chat-list');
+//     if (!chatList) return;
     
-    chatList.innerHTML = '';
-    chatHistory.forEach((messages, chatId) => {
-        const chatItem = document.createElement('div');
-        chatItem.className = `chat-item ${chatId === currentChatId ? 'active' : ''}`;
-        chatItem.textContent = messages[0]?.content?.slice(0, 30) + '...' || 'New Chat';
-        chatItem.onclick = () => loadChat(chatId);
-        chatList.appendChild(chatItem);
-    });
-}
+//     chatList.innerHTML = '';
+//     chatHistory.forEach((messages, chatId) => {
+//         const chatItem = document.createElement('div');
+//         chatItem.className = `chat-item ${chatId === currentChatId ? 'active' : ''}`;
+//         chatItem.textContent = messages[0]?.content?.slice(0, 30) + '...' || 'New Chat';
+//         chatItem.onclick = () => loadChat(chatId);
+//         chatList.appendChild(chatItem);
+//     });
+// }
 
-function loadChat(chatId) {
-    currentChatId = chatId;
-    chatMessages.innerHTML = '';
-    const messages = chatHistory.get(chatId) || [];
-    messages.forEach(msg => addMessage(msg.content, msg.type));
-    updateChatList();
-}
+// function loadChat(chatId) {
+//     currentChatId = chatId;
+//     chatMessages.innerHTML = '';
+//     const messages = chatHistory.get(chatId) || [];
+//     messages.forEach(msg => addMessage(msg.content, msg.type));
+//     updateChatList();
+// }
+
+// let chatHistory = []; // Store chat history
+
+// // Function to create a new chat
+// document.getElementById('new-chat-btn').addEventListener('click', function() {
+//     const chatDisplay = document.getElementById('chat-display');
+//     const chatHistorySelect = document.getElementById('chat-history-select');
+
+//     // Simulating new chat content
+//     const chatContent = `Chat started at ${new Date().toLocaleString()}`;
+//     chatDisplay.innerHTML = `<p>${chatContent}</p>`;
+
+//     // Add the new chat to the top of the history (stack)
+//     chatHistory.unshift(chatContent); // Push new chat to the beginning
+
+//     // Clear the dropdown and repopulate with updated history
+//     chatHistorySelect.innerHTML = '';
+//     chatHistory.forEach((chat, index) => {
+//         const option = document.createElement('option');
+//         option.value = index;
+//         option.textContent = `Chat ${index + 1}: ${chat}`;
+//         chatHistorySelect.appendChild(option);
+//     });
+
+//     // Automatically select the most recent chat
+//     chatHistorySelect.selectedIndex = 0;
+// });
+
+// // Load chat history when a user selects a different chat
+// document.getElementById('chat-history-select').addEventListener('change', function() {
+//     const selectedIndex = this.value;
+//     const chatDisplay = document.getElementById('chat-display');
+
+//     // Display the selected chat
+//     chatDisplay.innerHTML = `<p>${chatHistory[selectedIndex]}</p>`;
+// });
+
 
 // Event listeners
 userInput.addEventListener('input', function() {
@@ -393,7 +601,7 @@ listenButton.addEventListener('click', () => {
 newChatButton.addEventListener('click', () => {
     currentChatId = generateChatId();
     chatMessages.innerHTML = '';
-    addMessage('Hello! I\'m Pyxis AI. How can I help you today?', 'ai');
+    addMessage('Hello! I\'m Pixio AI. How can I help you today?', 'ai');
     updateChatList();
 });
 
@@ -403,10 +611,12 @@ recognition.onresult = (event) => {
     sendMessage();
 };
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    loadChatHistory();
-    if (!chatHistory.has(currentChatId)) {
-        addMessage('Hello! I\'m Pyxis AI. How can I help you today?', 'ai');
-    }
-});
+// // Initialize
+// document.addEventListener('DOMContentLoaded', () => {
+//     // loadChatHistory();
+//     if (!chatHistory.has(currentChatId)) {
+//         addMessage('Hello! I\'m Pixio AI. How can I help you today?', 'ai');
+//     }
+// });
+
+ 
