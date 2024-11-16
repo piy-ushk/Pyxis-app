@@ -24,19 +24,85 @@ body {
     max-width: 280px;
     width: 280px;
     height: 100vh;
-    background-color: var(--bg-darker);
-     
-    position: fixed;
-    left: -280px;
-    top: 0;
-    border-right: 1px solid #1e293b;
     overflow-y: auto;
+    max-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -280px; 
+    mask: linear(black, black, transparent);
+    backdrop-filter: blur(10px);
+   
+    border-right: 1px solid var(--border-color);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    
+    transition: left 0.3s ease;
+}
+.sidebar:hover,
+.sidebar.pinned {
+    left: 0;
 }
 
-.main-content {
-    margin-left: var(--sidebar-width);
-    padding: 2rem;
-    min-height: 100vh;
+.sidebar-hover-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100vh;
+    z-index: 9;
+}
+.sidebar.show {
+    transform: translateX(0);
+}
+.sidebar.hidden {
+    display: none; /* Hide sidebar when toggled */
+}
+@media (min-width: 992px) {
+    .sidebar-toggle{
+        display: none;
+    }
+    
+    }
+.chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 60px; /* Space for header */
+    /* transition: all 0.3s ease; Smooth transition for content shift */
+    flex-grow: 1;
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+}
+.pin-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: color 0.2s ease;
+}
+
+.pin-button:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-blue);
+}
+
+.pin-button.active {
+    color: var(--primary-blue);
+}
+.sidebar.pinned + .chat-container {
+    margin-left: 280px;
 }
 
 .nav-item {
@@ -219,9 +285,8 @@ button:hover {
     color: var(--primary-color);
     margin-bottom: 1rem;
 }
-.search-question-input{
 
-}
+
 #solution {
     background-color: #142c52;
     white-space: pre-wrap;
@@ -291,7 +356,9 @@ pre {
         width: 80%;
         
     }
-    
+    .pin-button{
+        display: none;
+    }
     .sidebar.show {
         transform: translateX(0);
         left: 0px;
@@ -310,6 +377,7 @@ pre {
     }
     .main-container{
         flex-grow: 1;
+        
     display: flex;
     flex-direction: column;
     max-width: 1200px;
