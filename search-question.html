@@ -27,6 +27,7 @@
 
 </head>
 <body>
+    <button class="sidebar-toggle" onclick="toggleSidebar()" >☰</button>
     <div class="sidebar">
         <div class="p-4">
             <h1 class="text-xl font-bold text-blue-500">PIXIO.ai for Academics</h1>
@@ -35,6 +36,10 @@
             <a href="example.html" class="nav-item active">
                 <i data-lucide="home" class="w-5 h-5 mr-3"></i>
                 Home
+            </a>
+            <a href="Pyxis.html" class="nav-item ">
+                <i data-lucide="bot" class="w-5 h-5 mr-3"></i>
+                Pixio AI
             </a>
             <a href="calculator.html" class="nav-item">
                 <i data-lucide="calculator" class="w-5 h-5 mr-3"></i>
@@ -54,16 +59,33 @@
             </a>
         </nav>
     </div>
-    <div class="main-content">
-        <nav class="search-question-nav">
-            <input class="search-question-input" placeholder="Ask another question">
-        </nav>
-        <div id="loading" class="hidden mt-4">
+    <main class="chat-container">
+       
+        
+    
+    <!-- Main Problem Solver -->
+    <div class="solution-card">
+        <h3 class="text-xl font-semibold mb-4">Problem Solver</h3>
+        <div class="input-container">
+        <textarea 
+            id="question" 
+            class="math-input mb-4" 
+            rows="1" 
+            placeholder="&nbsp;Enter your math problem here..."
+        ></textarea>
+        <button  onclick="solveMathProblem()" class="btn-primary">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
+            </svg>
+        </button>
+            
+    </div>
+    <div id="loading" class="hidden mt-4">
             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
         </div>
         <div id="solution" class="mt-4"></div>
-    </div>
-
+</div>
+</main>
     <script src="solve-math.js" >
        
     </script>
