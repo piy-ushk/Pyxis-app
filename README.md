@@ -1,13 +1,13 @@
-Project Name: Pyxis AI Chatbot
+Project Name: Pixio AI Chatbot
 
 Description:
-This web application serves as a chat interface, providing users with the ability to interact with Pyxis AI, an advanced language model. Users can input text queries or use voice commands to communicate with the AI, receiving informative and comprehensive responses.
+This web application serves as a chat interface, providing users with the ability to interact with Pixio AI, an advanced language model. Users can input text queries or use voice commands to communicate with the AI, receiving informative and comprehensive responses.
 
 Features:
 
 Text-based Chat: Users can type their queries or messages into the input field and send them to the AI.
 Voice Recognition: The application supports voice input, allowing users to speak their queries directly.
-AI Response Generation: Pyxis AI processes user input and generates relevant and informative responses.
+AI Response Generation: Pixio AI processes user input and generates relevant and informative responses.
 Preferences: Users can select from a variety of preferences to customize their interaction with the AI.
 Technologies Used:
 
@@ -19,6 +19,6 @@ Google's Gemini API: Uses Gemini's API capabilities for processing and respondin
 Usage:
 
 Open your web browser and navigate to http://localhost:3000.
-Start interacting with Pyxis AI by typing or speaking your queries.
+Start interacting with Pixio AI by typing or speaking your queries.
 Contributing:
 Contributions are welcome! Please feel free to fork the repository, make your changes, and submit a pull request.
