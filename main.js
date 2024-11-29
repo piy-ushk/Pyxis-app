@@ -13,7 +13,7 @@
   
 // Constants
 const API_KEY = 'AIzaSyBMeFzDkp-Wh4IOuFJbFjUT1RwjiH4Ee5E';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 // DOM Elements
 const chatMessages = document.getElementById('chat-messages');
