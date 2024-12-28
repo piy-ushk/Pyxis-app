@@ -12,7 +12,7 @@
   }
   
 // Constants
-const API_KEY = 'AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE';
+const API_KEY = 'AIzaSyCyS4DzLD-epGGor41xrXjRk-MDT6wEcfA';
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // DOM Elements
