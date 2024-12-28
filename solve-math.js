@@ -1,4 +1,4 @@
-const GEMINI_API_KEY = 'AIzaSyCX-s4eUSP5dQzmXao8RskFT6ZBPNhP9zE';
+const GEMINI_API_KEY = 'AIzaSyCyS4DzLD-epGGor41xrXjRk-MDT6wEcfA';
         
 // Initialize Lucide icons
 lucide.createIcons();
