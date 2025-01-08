@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXIO AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #eaeaea;
+            background-color: #000000;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        @keyframes slideUpFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated-logo {
+            animation: slideUpFadeIn 1.5s ease-out;
+        }
+        header {
+            background: #000;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #1c1c1c;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00ffcc;
+        }
+
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #000000, #1c1c1c);
+            padding: 0 20px;
+        }
+
+        #home h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            color: #eaeaea;
+            margin-bottom: 30px;
+        }
+
+        #home button {
+            background: #00ffcc;
+            border: none;
+            color: #000;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #home button:hover {
+            background-color: #00e6b8;
+            transform: scale(1.05);
+        }
+
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: #00ffcc;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #eaeaea;
+        }
+
+        #features img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        #cta {
+            background: #121212;
+            padding: 50px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            color: #ffffff;
+        }
+
+        #cta button {
+            background: #00ffcc;
+            border: none;
+            color: #000;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #cta button:hover {
+            background-color: #00e6b8;
+            transform: scale(1.05);
+        }
+      /* "See Pixio AI in Action" Section */
+#demo {
+    background: #000;
+    padding: 100px 20px;
+    color: #eaeaea;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#demo h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #00e6b8;
+}
+
+.demo-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.typing-demo p {
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.typing-demo .user {
+    color: #7a8986;
+    font-weight: bold;
+}
+
+.typing-demo .pixio {
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+        footer {
+            background: #1c1c1c;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #00ffcc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#demo">Testimonials</a>
+            <a href="#use-cases">Use Cases</a>
+            <a href="#cta">Get Started</a>
+        </nav>
+    </header>
+
+    <section id="home">
+
+        
+            <div class="animated-logo">
+                <svg viewBox="0 0 50 10" width="150" height="200" preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0,30) scale(0.030,-0.030)" fill="#ffffff" stroke="none">
+                        <!-- SVG path data here -->
+                        <path d="M882 1461 c-39 -38 -73 -78 -77 -90 -8 -26 -16 -26 -41 -3 -43 40
+                        -143 85 -181 80 -22 -2 -29 -9 -31 -30 -2 -16 -8 -28 -13 -28 -5 0 -9 -15 -9
+                        -34 0 -67 -11 -96 -36 -96 -12 0 -26 5 -29 10 -9 14 -126 12 -158 -2 -32 -16
+                        -36 -59 -11 -116 46 -103 57 -123 76 -136 24 -17 16 -56 -10 -56 -10 0 -25 -8
+                        -34 -17 -9 -10 -28 -26 -42 -36 -25 -17 -38 -67 -18 -67 5 0 26 -17 47 -37 40
+                        -39 67 -58 98 -69 9 -3 17 -10 17 -15 0 -5 9 -9 20 -9 11 0 20 -5 20 -11 0 -5
+                        5 -7 10 -4 6 4 16 2 23 -3 12 -9 76 -23 107 -22 46 1 110 13 110 21 0 6 6 9
+                        13 8 18 -3 67 12 67 21 0 4 11 11 25 14 14 4 50 32 81 62 l56 56 62 -59 c59
+                        -58 127 -100 154 -95 6 2 12 -2 12 -8 0 -5 15 -10 34 -10 19 0 38 -5 42 -11 4
+                        -7 20 -8 43 -4 20 3 55 8 79 11 23 4 42 10 42 14 0 4 16 11 36 15 41 7 41 7
+                        136 96 l71 66 -39 40 c-21 22 -49 43 -61 47 -37 12 -38 42 -4 85 17 21 31 43
+                        31 49 0 5 7 23 15 38 8 16 15 37 15 46 0 9 5 20 10 23 6 3 10 19 10 34 0 22
+                        -7 29 -33 39 -45 16 -138 15 -160 -3 -31 -23 -47 -8 -47 42 0 25 -6 59 -14 76
+                        -8 18 -17 40 -20 51 -5 15 -13 17 -44 13 -46 -6 -112 -29 -112 -39 0 -5 -5 -8
+                        -12 -8 -6 0 -22 -9 -34 -21 -24 -23 -64 -19 -64 7 0 20 -123 144 -142 144 -9
+                        0 -48 -31 -86 -69z m125 -38 c21 -20 50 -52 65 -72 l26 -35 -23 -22 c-34 -31
+                        -85 -117 -85 -142 0 -11 -5 -24 -12 -28 -14 -9 -38 23 -38 53 0 13 -4 23 -9
+                        23 -5 0 -12 8 -15 18 -3 9 -22 34 -41 55 -34 37 -45 67 -25 67 6 0 10 5 10 11
+                        0 10 95 109 105 109 2 0 22 -16 42 -37z m-367 -43 c0 -5 11 -12 25 -16 14 -3
+                        25 -10 25 -14 0 -5 14 -11 31 -15 l31 -7 -7 -61 c-8 -73 -26 -105 -46 -84 -20
+                        20 -79 47 -102 47 -18 0 -19 6 -15 64 2 35 10 71 17 80 15 18 41 22 41 6z
+                        m694 -30 c9 -22 16 -56 14 -77 -2 -32 -7 -39 -27 -41 -25 -4 -65 -26 -90 -50
+                        -18 -17 -41 2 -41 33 0 13 -8 37 -17 53 -21 36 -13 46 65 82 28 14 52 28 52
+                        32 0 5 6 8 13 8 7 0 21 -18 31 -40z m-498 -117 c8 -10 24 -38 36 -63 13 -25
+                        26 -47 30 -50 4 -3 10 -25 14 -48 4 -23 10 -42 15 -42 5 0 9 -16 9 -35 0 -19
+                        -3 -35 -7 -35 -5 0 -26 26 -48 56 -22 31 -55 69 -72 85 -26 22 -33 36 -33 64
+                        0 19 5 35 10 35 6 0 8 11 4 25 -5 20 -2 25 11 25 10 0 24 -8 31 -17z m298 1
+                        c3 -9 6 -26 6 -39 0 -13 5 -27 10 -30 17 -11 12 -20 -49 -82 -32 -33 -64 -74
+                        -72 -92 -15 -33 -24 -39 -32 -18 -6 17 4 77 13 77 4 0 10 19 14 42 4 23 10 45
+                        14 48 4 3 16 23 27 45 10 22 23 46 28 53 13 17 34 15 41 -4z m-666 -31 c34 -3
+                        62 -9 62 -13 0 -4 15 -10 33 -14 35 -7 100 -37 105 -48 2 -5 10 -8 18 -8 9 0
+                        62 -47 120 -105 111 -112 128 -145 74 -145 -16 0 -30 -4 -30 -10 0 -6 -28 -10
+                        -65 -10 -36 0 -65 4 -65 9 0 4 -24 11 -52 14 -29 4 -54 11 -56 17 -2 5 -10 10
+                        -19 10 -30 0 -172 129 -173 158 0 6 -3 12 -8 12 -4 0 -20 27 -35 60 -32 67
+                        -30 96 6 86 12 -4 50 -9 85 -13z m1110 0 c12 -12 13 -18 4 -21 -6 -2 -12 -10
+                        -12 -18 0 -8 -4 -14 -9 -14 -5 0 -12 -13 -16 -30 -4 -16 -10 -30 -15 -30 -4 0
+                        -11 -11 -14 -24 -7 -28 -86 -116 -104 -116 -6 0 -12 -4 -12 -8 0 -15 -125 -72
+                        -158 -72 -18 0 -32 -4 -32 -10 0 -6 -28 -10 -65 -10 -37 0 -65 4 -65 10 0 6
+                        -13 10 -30 10 -37 0 -40 23 -7 65 39 53 142 155 155 155 6 0 12 5 12 10 0 6
+                        10 15 23 20 12 6 29 14 37 19 28 17 88 41 103 41 9 0 19 5 22 10 3 6 30 10 58
+                        10 29 0 59 5 67 10 22 14 39 12 58 -7z m-593 -253 c10 -17 -5 -70 -21 -70 -16
+                        0 -29 42 -20 65 6 17 32 20 41 5z m-421 -104 c68 -33 90 -38 161 -40 53 -1 60
+                        -3 60 -21 0 -15 -8 -21 -30 -23 -16 -2 -34 -8 -40 -13 -12 -12 -172 -12 -180
+                        1 -3 6 -15 10 -25 10 -26 0 -79 29 -134 73 -37 30 -29 58 25 85 l41 20 36 -34
+                        c19 -18 58 -45 86 -58z m991 55 c17 -10 31 -24 32 -32 5 -23 -127 -108 -169
+                        -109 -9 0 -20 -4 -23 -10 -7 -12 -172 -14 -179 -2 -2 4 -19 9 -38 10 -38 3
+                        -53 15 -45 35 4 10 30 16 93 20 51 3 90 10 92 16 2 6 11 11 21 11 19 0 99 48
+                        133 80 15 14 25 17 37 9 9 -5 30 -18 46 -28z"/>
+                        <path d="M938 1359 c-26 -14 -23 -64 4 -83 19 -14 24 -13 50 5 34 24 36 45 6
+                        70 -24 21 -35 23 -60 8z"/>
+                        <path d="M571 1076 c-7 -8 -11 -32 -9 -53 3 -35 6 -38 34 -41 27 -3 34 2 47
+                        27 9 17 12 31 9 31 -4 0 -12 10 -17 23 -12 26 -47 34 -64 13z"/>
+                        <path d="M1288 1069 c-34 -37 -12 -89 39 -89 55 0 72 49 30 88 -28 26 -46 27
+                        -69 1z"/>
+                        <path d="M932 754 c-25 -17 -31 -71 -10 -92 16 -16 60 -15 80 1 30 24 29 47
+                        -1 78 -34 34 -39 34 -69 13z"/>
+                        <path d="M917 513 c-15 -14 -6 -69 13 -86 26 -22 39 -21 68 2 24 21 29 60 10
+                        79 -13 13 -80 17 -91 5z"/>
+                    </g>
+                </svg>
+
+            </div>    
+        <h1 data-aos="fade-up"> </h1>
+        <p data-aos="fade-up" data-aos-delay="200">Your personal AI assistant, smarter than ever, ready to assist you in academics, creativity, and more.</p>
+        <a href="#features"><button data-aos="fade-up" data-aos-delay="400">Explore Pixio AI</button></a>
+    </section>
+
+    <section id="features">
+        <h2 data-aos="fade-right">Features</h2>
+        <p data-aos="fade-right">Pixio AI can solve complex math problems, organize your ideas, and be your ultimate productivity partner.</p>
+        <img src="https://via.placeholder.com/800x400" alt="Feature image" data-aos="zoom-in">
+    </section>
+
+    <section id="demo" class="reveal">
+        <h2 data-aos="fade-left">See Pixio AI in Action</h2>
+        <div class="demo-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="typing-demo">
+                <p>
+                    <span class="user">User:</span> Can you help me solve this calculus problem?<br>
+                    <span class="pixio">Pixio:</span> Of course! I'll guide you through it step by step.<br>
+                    <span class="user">User:</span> What's the derivative of x²sin(x)?<br>
+                    <span class="pixio">Pixio:</span> Let's solve this using the product rule:<br>
+                    <span class="pixio">Pixio:</span> 
+                    1. First, let's identify our functions: u = x², v = sin(x).<br>
+                    2. The product rule states: d/dx(uv) = u(dv/dx) + v(du/dx).<br>
+                    3. Here's the solution step by step...
+                </p>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="use-cases">
+        <h2 data-aos="fade-right">Use Cases</h2>
+        <p data-aos="fade-right" data-aos-delay="200">Perfect for academics, creative brainstorming, and staying organized in your personal and professional life.</p>
+    </section>
+
+    <section id="cta">
+        <h2>Ready to Try Pixio AI?</h2>
+        <p>Jump in and experience the power of your personal AI assistant.</p>
+        <a href="index.html"><button>Try Pixio AI</button></a>
+    </section>
+
+    <footer>
+        <p>&copy; Powered By Gemini | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+    // Initialize AOS animations
+    AOS.init({
+            duration: 800,
+            offset: 200,
+            easing: 'ease-in-out',
+            once: true,
+        });
+
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            document.querySelector(link.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Change header background color on scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.backgroundColor = '#1c1c1c';
+        } else {
+            header.style.backgroundColor = 'transparent';
+        }
+    });
+
+    // Typing effect for the "See Pixio AI in Action" section
+    const demoText = [
+        { speaker: "User", text: "Can you help me solve this calculus problem?" },
+        { speaker: "Pixio", text: "Of course! I'll guide you through it step by step." },
+        { speaker: "User", text: "What's the derivative of x²sin(x)?" },
+        { speaker: "Pixio", text: "Let's solve this using the product rule:" },
+        { speaker: "Pixio", text: "1. First, let's identify our functions: u = x², v = sin(x)." },
+        { speaker: "Pixio", text: "2. The product rule states: d/dx(uv) = u(dv/dx) + v(du/dx)." },
+        { speaker: "Pixio", text: "3. Here's the solution step by step..." },
+    ];
+
+    const typingDemo = document.querySelector('.typing-demo p');
+    let currentIndex = 0;
+    let currentChar = 0;
+
+    function typeText() {
+        if (currentIndex < demoText.length) {
+            const { speaker, text } = demoText[currentIndex];
+            const displayText = `<span class="${speaker.toLowerCase()}">${speaker}:</span> ${text.substring(0, currentChar + 1)}`;
+            typingDemo.innerHTML = typingDemo.innerHTML.split('<br>').slice(0, -1).join('<br>') + '<br>' + displayText;
+
+            currentChar++;
+            if (currentChar < text.length) {
+                setTimeout(typeText, 50);
+            } else {
+                currentChar = 0;
+                currentIndex++;
+                typingDemo.innerHTML += '<br>';
+                setTimeout(typeText, 1000);
+            }
+        }
+    }
+
+    setTimeout(typeText, 1000);
+
+    // Typewriter effect for hero section
+    const heroHeading = document.querySelector('#home h1');
+    const tagline = "Welcome to Pixio AI";
+    let charIndex = 0;
+
+    function typeWriterEffect() {
+        if (charIndex < tagline.length) {
+            heroHeading.textContent += tagline.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriterEffect, 100);
+        }
+    }
+
+    typeWriterEffect();
+});
+
+
+    </script>
+</body>
+</html>
