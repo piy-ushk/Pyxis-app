@@ -1,11 +1,4 @@
-lottie.loadAnimation({
 
-  container: document.getElementById('splashScreen'), // The container for the animation
-
-  renderer: 'svg', // Choose 'svg' for high quality
-  loop: true, // Set true for a looping animation
-  autoplay: true, // Start automatically
-});
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
