@@ -1,6 +1,7 @@
 const CACHE_NAME = 'Pixio-cache-v1';
 const urlsToCache = [
   '/',
+  '/index1.html',
   '/index.html',
   '/index3.html',
   '/styles.css',
