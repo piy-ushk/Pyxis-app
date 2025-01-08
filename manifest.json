@@ -2,7 +2,7 @@
     "name": "Pixio AI",
     "short_name": "Pixio",
     "description": "AI-powered assistant for image generation and analysis.",
-    "start_url": "/index.html",
+    "start_url": "/index1.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#007bff",
