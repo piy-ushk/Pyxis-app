@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
   }
   
 // Constants
-const API_KEY = 'AIzaSyBt51NsF__qc1cNj_j3-dm1s4oc9RX6NMU';
+const API_KEY = 'AIzaSyCyS4DzLD-epGGor41xrXjRk-MDT6wEcfA';
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 // DOM Elements
