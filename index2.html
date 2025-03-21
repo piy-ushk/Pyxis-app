@@ -4,72 +4,202 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat History</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #252526;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #eee;
+        }
+
+        #chat-history-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        #chat-history-select option {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #chat-display {
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #2d2d2d;
+            color: #fff;
+            min-height: 100px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+        }
+
+        #new-chat-btn {
+            padding: 12px 24px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #new-chat-btn:hover {
+            background-color: #449d44;
+        }
+    </style>
 </head>
 <body>
-  
- 
-    <button class="sidebar-toggle" onclick="toggleSidebar()" >☰</button>
-  <div class="sidebar  ">
-
-
-      <button class="new-chat-button">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 4L12 20M4 12L20 12" stroke="currentColor" stroke-width="2"/>
-          </svg>
-          New chat
-      </button>
-      
-         <div class="bottom-sidebar">
-      <div class="predefined-prompts">
-        <h3>Predefined Prompts</h3>
-        <div class="prompt-carousel">
-            <div class="prompt-card">
-                <h4>Professional Email</h4>
-                <p>Help me write a professional email about...</p>
-                <button class="use-prompt-btn" onclick="usePrompt('Help me write a professional email about...')">Use Prompt</button>
-            </div>
-            <div class="prompt-card">
-                <h4>Explain a Concept</h4>
-                <p>Explain the concept of...</p>
-                <button class="use-prompt-btn" onclick="usePrompt('Explain the concept of...')">Use Prompt</button>
-            </div>
-            <div class="prompt-card">
-                <h4>Coding Assistance</h4>
-                <p>Help me with coding...</p>
-                <button class="use-prompt-btn" onclick="usePrompt('Help me with coding...')">Use Prompt</button>
-            </div>
+    <div class="container">
+        <h1>Chat History</h1>
+        <select id="chat-history-select">
+            <option value="">Select a chat</option>
+        </select>
+        <div id="chat-display">
+            <p>Select a chat to view its history.</p>
         </div>
-        <div class="carousel-controls">
-            <button class="carousel-control" onclick="moveCarousel(-1)">&#8249;</button>
-            <button class="carousel-control" onclick="moveCarousel(1)">&#8250;</button>
-        </div>
+        <button id="new-chat-btn">New Chat</button>
     </div>
-        
-        <div class="sidebar-items">
-          <ul>
-            <!-- Existing links -->
+
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatHistorySelect = document.getElementById('chat-history-select');
+    const newChatBtn = document.getElementById('new-chat-btn');
+    const chatDisplay = document.getElementById('chat-display');
+    
+    // Load chat history from localStorage
+    function loadChatHistory() {
+      try {
+        const savedHistory = localStorage.getItem('chatHistory');
+        if (savedHistory) {
+          const chatHistory = new Map(JSON.parse(savedHistory));
+          
+          // Clear existing options
+          chatHistorySelect.innerHTML = '<option value="">Select a chat</option>';
+          
+          // Add chat history options
+          chatHistory.forEach((messages, chatId) => {
+            const firstMessage = messages[0]?.content || 'New Chat';
+            const option = document.createElement('option');
+            option.value = chatId;
+            option.textContent = firstMessage.slice(0, 30) + '...';
+            chatHistorySelect.appendChild(option);
+          });
+        } else {
+          chatDisplay.innerHTML = '<p>No chat history found.</p>';
+        }
+      } catch (error) {
+        console.error('Error loading chat history:', error);
+        chatDisplay.innerHTML = '<p>Error loading chat history.</p>';
+      }
+    }
+    
+    // Display selected chat
+    function displayChat(chatId) {
+      try {
+        const savedHistory = localStorage.getItem('chatHistory');
+        if (savedHistory) {
+          const chatHistory = new Map(JSON.parse(savedHistory));
+          const messages = chatHistory.get(chatId);
+          
+          if (messages && messages.length) {
+            chatDisplay.innerHTML = '';
             
-            <li><a href="index3.html">Image Generation/Analysis</a></li>  
-            <li><a href="index2.html">Chat History</a></li>
-            <li><a href="example.html">Academics</a></li>
-          </ul>
-        </div>
-      </div>
-        </div> 
-        <div class="main-container"> 
-        <div class="chat-list">
-          <a class="chat-item">Chat 1</a>
-          <a class="chat-item">Chat 2</a>
-          <a class="chat-item">Chat 3</a>
-          <a class="chat-item">Chat 4</a>
-          <a class="chat-item">Chat 5</a>
-        </div>
-     </div>
-     <script src="main.js">
-       
-     </script>
- </body>
- </html>
- 
+            messages.forEach(msg => {
+              const messageDiv = document.createElement('div');
+              messageDiv.className = `chat-message ${msg.type}-message`;
+              messageDiv.innerHTML = `
+                <div class="message-sender">${msg.type === 'user' ? 'You' : 'Pixio AI'}</div>
+                <div class="message-content">${msg.content}</div>
+              `;
+              chatDisplay.appendChild(messageDiv);
+            });
+          } else {
+            chatDisplay.innerHTML = '<p>No messages in this chat.</p>';
+          }
+        }
+      } catch (error) {
+        console.error('Error displaying chat:', error);
+        chatDisplay.innerHTML = '<p>Error displaying chat.</p>';
+      }
+    }
+    
+    // Event listeners
+    chatHistorySelect.addEventListener('change', function() {
+      const selectedChatId = this.value;
+      if (selectedChatId) {
+        displayChat(selectedChatId);
+      } else {
+        chatDisplay.innerHTML = '<p>Select a chat to view its history.</p>';
+      }
+    });
+    
+    newChatBtn.addEventListener('click', function() {
+      window.location.href = 'Pyxis.html';
+    });
+    
+    // Add CSS for chat messages
+    const style = document.createElement('style');
+    style.textContent = `
+      .chat-message {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+      }
+      
+      .user-message {
+        background-color: #2d2d2d;
+        margin-left: 20%;
+      }
+      
+      .ai-message {
+        background-color: #3a3a3a;
+        margin-right: 20%;
+      }
+      
+      .message-sender {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      
+      .message-content {
+        line-height: 1.5;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Initialize
+    loadChatHistory();
+    chatDisplay.innerHTML = '<p>Select a chat to view its history.</p>';
+  });
+</script>
+</body>
+</html>
+
