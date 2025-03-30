@@ -16,6 +16,16 @@
             color: #fff;
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal scroll */
+
+            @keyframes slideUpFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         a {
@@ -88,8 +98,7 @@
         }
 
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+            animation: slideUpFadeIn 1.5s ease-out;
         }
 
         #hero h1 {
