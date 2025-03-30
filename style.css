@@ -46,7 +46,7 @@ body {
   
   .logo-pyxis svg {
     display: block;
-     margin-bottom: 13%;
+     margin-bottom: 4%;
   }
 /* Main container for flex layout */
 .main-container {
@@ -92,9 +92,10 @@ body {
 }
 .sidebar.show {
     transform: translateX(0);
+    left: 280px;
 }
 .sidebar.hidden {
-    display: none; /* Hide sidebar when toggled */
+    left: -280px;  
 }
 .pin-button {
     position: absolute;
@@ -121,7 +122,18 @@ body {
     margin-left: 280px;
 }
 
- 
+.sidebar-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    
+    
+    border: none;
+    
+    cursor: pointer;
+    
+   
+}
 .sidebar-items ul {
     list-style-type: none;
     padding: 0;
@@ -147,12 +159,13 @@ body {
 }
 
 /* Media query for mobile devices */
+@media (min-width: 500px){
+    .sidebar-toggle {
+       display: none;
+    }
+}
 
-@media (min-width: 992px) {
-.sidebar-toggle{
-    display: none;
-}
-}
+    
  .sidebar-items{
     max-width: 280px;
     width: 280px;
@@ -294,7 +307,13 @@ body {
     cursor: pointer;
     font-size: 16px;
 }
-
+.chat-header{
+   
+   
+        color: var(--primary-blue);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+}
 #chat-history-select option {
     background-color: #f9f9f9; /* Light background for dropdown */
     color: #333; /* Text color for dropdown items */
@@ -363,6 +382,10 @@ body {
     align-items: center;
     gap: 12px;
 }
+.logo-container svg {
+    width: 100%;
+    height: 100%;
+  }
 
 /* New Pyxis logo */
 .logo-pyxis {
@@ -374,7 +397,7 @@ body {
 
 .logo-pyxis svg {
     width: 200px;
-    height: 80px;
+    height: 150px;
     filter: drop-shadow(0 0 12px rgba(74, 144, 226, 0.5));
 }
 
@@ -593,19 +616,10 @@ body {
         transform: translateY(-4px);
     }
 }
-
 /* Media queries for mobile devices */
 
 
-@media (min-width: 768px) {
-    .sidebar {
-        width: 280px;
-    }
-
-    .new-chat-button {
-        width: 100%;
-    }
-}
+ 
  ::-webkit-scrollbar{
     scroll-behavior: smooth;
     scrollbar-color: var(--primary-blue);
@@ -695,12 +709,18 @@ body {
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-     
+    .new-chat-button {
+        width: 100%;
+        margin-top: 13%;
+    }
 
     .logo-container {
-        margin-top: 100px; /* Adjust this value to position below the toggle button */
-        align-self: center; /* Center the logo horizontally */
-        max-width: 80%; /* Ensure it doesn't overflow */
+        /* margin-top: 100px;  
+        align-self: center;  
+        max-width: 80%;   */
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
     }
     .logo-pixis {
         display: flex;
@@ -710,6 +730,14 @@ body {
     }
     .chat-container {
         padding: 16px; /* Adjust padding for mobile */
+    }
+    .chat-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 0;
+        margin-top: 7%;
+        border-bottom: 1px solid var(--border-color);
     }
     .prompt-card {
         flex: 0 0 calc(100% - 32px);
@@ -736,9 +764,15 @@ body {
     .logo-pyxis {
         display: flex;
         align-items: center;
-        margin-top: 8%;
+        margin-top:15vh;
+        margin-bottom: 5vh;
         text-decoration: none;
         color: var(--text-primary);
+        right: 13vh;
+            width: 200px;
+            height: 250px;
+            filter: drop-shadow(0 0 12px rgba(74, 144, 226, 0.5));
+        
     }
      
     .sidebar.show {
