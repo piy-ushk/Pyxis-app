@@ -148,7 +148,7 @@ const firebaseConfig = {
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           // Redirect to main app
-          window.location.href = 'Pyxis.html';
+          window.location.href = 'index.html';
         })
         .catch((error) => {
           console.error('Sign in error:', error);
@@ -220,7 +220,7 @@ const firebaseConfig = {
       auth.signInWithPopup(provider)
         .then((result) => {
           // Redirect to main app
-          window.location.href = 'Pyxis.html';
+          window.location.href = 'index.html';
         })
         .catch((error) => {
           console.error('Google sign in error:', error);
@@ -234,7 +234,7 @@ const firebaseConfig = {
       auth.signInWithPopup(provider)
         .then((result) => {
           // Redirect to main app
-          window.location.href = 'Pyxis.html';
+          window.location.href = 'index.html';
         })
         .catch((error) => {
           console.error('Google sign up error:', error);
@@ -246,7 +246,7 @@ const firebaseConfig = {
     auth.onAuthStateChanged((user) => {
       if (user) {
         // User is signed in, redirect to main app
-        window.location.href = 'Pyxis.html';
+        window.location.href = 'index.html';
       }
     });
 
