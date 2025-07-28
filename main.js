@@ -11,7 +11,7 @@ if ('serviceWorker' in navigator) {
   
 // Constants
 const API_KEY = 'AIzaSyBlSmMlgbg6PiCObRP26XemuGPfZXhGO04';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
 // DOM Elements
 const chatMessages = document.getElementById('chat-messages');
